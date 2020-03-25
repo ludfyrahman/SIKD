@@ -25,20 +25,20 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active">
+        <li class="<?= ($this->uri->segment(2) == "dashboard" ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
-        <li>
+        <li class="<?= ($this->uri->segment(2) == "pengguna" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengguna') ?>">
             <i class="fa fa-users"></i> <span>Pengguna</span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
-            </span>
+            </span> -->
           </a>
         </li>
-        <li class="treeview">
+        <li class="treeview" class="<?= ($this->uri->segment(2) == "kategori" ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
             <span>Kategori</span>
@@ -53,7 +53,7 @@
             <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
           </ul>
         </li>
-        <li class="treeview">
+        <li class="treeview" class="<?= ($this->uri->segment(2) == "arsip" ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-files-o"></i>
             <span>Arsip</span>

@@ -21,9 +21,7 @@ class Pengguna extends CI_Controller {
     public function index(){
 		$data['title'] = "Data Pengguna";
 		$data['content'] = "pengguna/index";
-		// $data['uri'] = base_url(uri_string());
-		// echo "<pre>";
-		// print_r($data);
+		$data['data'] = $this->db->get("pengguna")->result_array();
         $this->load->view('backend/index',$data);
     }
 	
@@ -31,65 +29,71 @@ class Pengguna extends CI_Controller {
 	{
 		$data['title'] = "Tambah Pengguna";
 		$data['content'] = "pengguna/_form";
-		$data['data'] = null;		
+		$data['data'] = null;
+		$data['type'] = 'Tambah';
 		$this->load->view('backend/index',$data);
+		// Response_Helper::render('backend/index', $data);
 	}
 
 	public function store(){
 		$d = $_POST;
 		try{
-			$kode = $this->Maksi->random_oke(16);
-			$password= $this->input->post('password');
 			$arr =
 			[
-				'kode_user' => $kode,
-				'kode_role' => $this->input->post('kode_role'), 
-				'nama_user' => $this->input->post('nama_user'), 
-				'akses_data' => $this->input->post('akses_data'), 
+				'nama' => $this->input->post('nama'), 
 				'email' => $this->input->post('email'), 
-				'create_by' => $_SESSION['kode_user'],  
-				'create_at' => date('Y-m-d H:i:s'),
-				'password' => password_hash($password, PASSWORD_BCRYPT), 
-				'status' => 1
+				'level' => $this->input->post('level'), 
+				// 'create_by' => $_SESSION['id_user'],  
+				'created_by' => 1,  
+				'status' => $this->input->post('status')
 			];
-			$this->db->insert("pengguna",$arr);
-			$this->session->set_flashdata("message", ['success', 'Berhasil Tambah Data Pengguna', ' Berhasil']);
-			redirect(base_url("admin/pengguna/".$this->input->post('kode_role')));
+			if($d['password'] != $d['password_konfirmasi']){
+				$this->session->set_flashdata("message", ['success', 'Password konfirmasi dengan password tidak sama', ' Berhasil']);
+				return $this->add();
+			}else{
+				$arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
+				$this->db->insert("pengguna",$arr);
+				redirect(base_url("admin/pengguna/"));
+			}
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', 'Gagal Tambah Data Pengguna', ' Gagal']);
-			redirect(base_url("admin/pengguna/add".$id));
+			redirect(base_url("admin/pengguna/add"));
 			// $this->add();
 		}
 	}
 		
-	public function edit($id, $role){
-		$data['title'] = "Tambah Pengguna";
-		$data['content'] = "akun/_form";
-		$data['dataid'] = $id;
-		$data['data'] = $this->db->get_where("user", ['kode_user' => $id])->row_array();		
+	public function edit($id){
+		$data['title'] = "Ubah Pengguna";
+		$data['content'] = "pengguna/_form";
+		$data['type'] = 'Ubah';
+		$data['data'] = $this->db->get_where("pengguna", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);
 	}
 	
 	public function update($id){
+		$d = $_POST;
 		try{
-			$datlama = $this->db->get_where("user", ['kode_user' => $id])->row_array();	
-			$passbaru = $datlama['password'];
-			if($this->input->post('password') != ""){
-				$password= $this->input->post('password');
-				$passbaru = password_hash($password, PASSWORD_BCRYPT);
-			}
 			$arr =
 			[
-				'kode_role' => $this->input->post('kode_role'), 
-				'nama_user' => $this->input->post('nama_user'), 
-				'akses_data' => $this->input->post('akses_data'), 
-				'email' => $this->input->post('email'),
-				'password' => $passbaru, 
+				'nama' => $this->input->post('nama'), 
+				'email' => $this->input->post('email'), 
+				'level' => $this->input->post('level'), 
+				// 'create_by' => $_SESSION['id_user'],  
+				'created_by' => 1,  
+				'status' => $this->input->post('status')
 			];
-			$this->Maksi->updateData("user",$arr,$id,"kode_user");
-				$this->session->set_flashdata("message", ['success', 'Berhasil Edit Data Pengguna', ' Berhasil']);
-				redirect(base_url("admin/pengguna/data/".$this->input->post('kode_role')));
+			if($d['password'] !=''){
+				if($d['password'] != $d['password_konfirmasi']){
+					$this->session->set_flashdata("message", ['danger', 'Password konfirmasi dengan password tidak sama', ' Berhasil']);
+					redirect(base_url("admin/pengguna/edit/".$id));
+				}else{
+					$arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
+				}
+			}
+			$this->session->set_flashdata("message", ['success', 'Ubah Pengguna Berhasil', ' Berhasil']);
+			$this->db->update("pengguna",$arr, ['id' => $id]);
+			redirect(base_url("admin/pengguna/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', 'Gagal Edit Data Pengguna', ' Gagal']);
@@ -99,21 +103,14 @@ class Pengguna extends CI_Controller {
 	}
 		
 	public function delete($id){
-		$datlama = $this->db->get_where("user", ['kode_user' => $id])->row_array();	
-		if(Role_helper::cek_role($_SESSION['kode_role'], $datlama['kode_role'], 4)){
 			try{
-				$arr = ['status' => 0];
-					$this->Maksi->updateData("user",$arr,$id,"kode_user");
-		
-					$this->session->set_flashdata("message", ['success', 'Berhasil Hapus Data Pengguna', 'Berhasil']);
-					redirect(base_url("admin/pengguna/data/".$datlama['kode_role']));
+				$this->db->delete("pengguna", ['id' => $id]);
+				$this->session->set_flashdata("message", ['success', 'Berhasil Hapus Data Pengguna', 'Berhasil']);
+				redirect(base_url("admin/pengguna/"));
 				
 			}catch(Exception $e){
 				$this->session->set_flashdata("message", ['danger', 'Gagal Hapus Data Pengguna', 'Gagal']);
-				redirect(base_url("admin/pengguna/data/".$datlama['kode_role']));
+				redirect(base_url("admin/pengguna/"));
 			}
-		}else{
-			$this->load->view('errors/403');		
-		}
 	}
 }
