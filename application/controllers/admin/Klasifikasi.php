@@ -1,13 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Pengguna extends CI_Controller {
+class Klasifikasi extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
-		$this->low = "pengguna";
-		$this->cap = "Pengguna";
-		$this->load->helper("Response_helper");
-		$this->load->helper("Input_helper");
+		$this->low = "klasifikasi";
+		$this->cap = "Klasifikasi";
 		date_default_timezone_set('Asia/Jakarta');
 		// if(!isset($_SESSION['kode_user'])){
 		// 	redirect(base_url());

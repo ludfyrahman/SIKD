@@ -1,13 +1,11 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Pengguna extends CI_Controller {
+class Jabatan extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
-		$this->low = "pengguna";
-		$this->cap = "Pengguna";
-		$this->load->helper("Response_helper");
-		$this->load->helper("Input_helper");
+		$this->low = "jabatan";
+		$this->cap = "Jabatan";
 		date_default_timezone_set('Asia/Jakarta');
 		// if(!isset($_SESSION['kode_user'])){
 		// 	redirect(base_url());
@@ -31,6 +29,7 @@ class Pengguna extends CI_Controller {
 		$data['content'] = "$this->low/_form";
 		$data['data'] = null;
 		$data['type'] = 'Tambah';
+		$data['atasan'] = $this->db->query("SELECT * FROM $this->low")->result_array();
 		$this->load->view('backend/index',$data);
 		// Response_Helper::render('backend/index', $data);
 	}
@@ -41,21 +40,13 @@ class Pengguna extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'email' => $this->input->post('email'), 
-				'level' => $this->input->post('level'), 
-				// 'create_by' => $_SESSION['id_user'],  
-				'created_by' => 1,  
-				'status' => $this->input->post('status')
+				'id_parent' => $this->input->post('atasan'), 
+				'keterangan' => $this->input->post('keterangan'), 
+				'created_by' => $_SESSION['userid'],  
 			];
-			if($d['password'] != $d['password_konfirmasi']){
-				$this->session->set_flashdata("message", ['success', 'Password konfirmasi dengan password tidak sama', ' Berhasil']);
-				return $this->add();
-			}else{
-				$arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
-				$this->db->insert("$this->low",$arr);
-				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
-				redirect(base_url("admin/$this->low/"));
-			}
+			$this->db->insert("$this->low",$arr);
+			$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
+			redirect(base_url("admin/$this->low/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Tambah Data $this->cap", ' Gagal']);
@@ -68,6 +59,7 @@ class Pengguna extends CI_Controller {
 		$data['title'] = "Ubah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['type'] = 'Ubah';
+		$data['atasan'] = $this->db->query("SELECT * FROM $this->low")->result_array();
 		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);
 	}
@@ -78,20 +70,12 @@ class Pengguna extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'email' => $this->input->post('email'), 
-				'level' => $this->input->post('level'), 
-				// 'create_by' => $_SESSION['id_user'],  
-				'created_by' => 1,  
-				'status' => $this->input->post('status')
+				'id_parent' => $this->input->post('atasan'), 
+				'keterangan' => $this->input->post('keterangan'), 
+				'updated_at' => date('Y-m-d H:i:s'),
+				'updated_by' => $_SESSION['userid'],
 			];
-			if($d['password'] !=''){
-				if($d['password'] != $d['password_konfirmasi']){
-					$this->session->set_flashdata("message", ['danger', 'Password konfirmasi dengan password tidak sama', ' Berhasil']);
-					redirect(base_url("admin/$this->low/edit/".$id));
-				}else{
-					$arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
-				}
-			}
+			
 			$this->session->set_flashdata("message", ['success', "Ubah $this->cap Berhasil", ' Berhasil']);
 			$this->db->update("$this->low",$arr, ['id' => $id]);
 			redirect(base_url("admin/$this->low/"));

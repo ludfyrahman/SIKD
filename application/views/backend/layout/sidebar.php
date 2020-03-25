@@ -38,10 +38,46 @@
             </span> -->
           </a>
         </li>
-        <li class="treeview" class="<?= ($this->uri->segment(2) == "kategori" ? 'active' : '') ?>">
+        <li  class="<?= ($this->uri->segment(2) == "jabatan" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/jabatan') ?>">
+            <i class="fa fa-user"></i>
+            <span>Jabatan</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "pengirim" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/pengirim') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Pengirim</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "sifat" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/sifat') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Sifat</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "jenis" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/jenis') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Jenis</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "retensi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/retensi') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Retensi</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/klasifikasi') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Klasifikasi</span>
+          </a>
+        </li>
+        <li class="treeview" class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
-            <span>Kategori</span>
+            <span>Klasifikasi</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
