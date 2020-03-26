@@ -11,6 +11,9 @@ class Response_helper
 		// echo $ci->uri->segment(2);
 		include str_replace("system", "application/views/", BASEPATH) . "part/$file.php";
 	}
+	public static function date($date){
+		return date('d M Y', strtotime($date));
+	}
 	public static function time($time, $full = false)
 	{
 		$now = new DateTime;
