@@ -42,5 +42,11 @@ class Site extends CI_Controller { //mengextends CI_Controller
             echo "gagal";
         }
     }
+    public function logout(){
+        // session_unset("userid");
+        // session_unset("userlevel");
+        session_destroy();
+        redirect(base_url());
+    }
 }
 ?>

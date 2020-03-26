@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-class Surat_Masuk extends CI_Controller {
+class Surat_Keluar extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
-		$this->low = "surat_masuk";
-		$this->content = "surat/masuk";
-		$this->cap = "Surat Masuk";
+		$this->low = "surat_keluar";
+		$this->content = "surat/keluar";
+		$this->cap = "Surat Keluar";
 		date_default_timezone_set('Asia/Jakarta');
 		// if(!isset($_SESSION['kode_user'])){
 		// 	redirect(base_url());

@@ -7,7 +7,38 @@ class Response_helper
 
 	public static function part($file)
 	{
+		$ci = get_instance();
+		// echo $ci->uri->segment(2);
 		include str_replace("system", "application/views/", BASEPATH) . "part/$file.php";
+	}
+	public static function time($time, $full = false)
+	{
+		$now = new DateTime;
+		$ago = new DateTime($time);
+		$diff = $now->diff($ago);
+
+		$diff->w = floor($diff->d / 7);
+		$diff->d -= $diff->w * 7;
+
+		$string = array(
+			'y' => 'year',
+			'm' => 'month',
+			'w' => 'week',
+			'd' => 'day',
+			'h' => 'hour',
+			'i' => 'minute',
+			's' => 'second',
+		);
+		foreach ($string as $k => &$v) {
+			if ($diff->$k) {
+				$v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+			} else {
+				unset($string[$k]);
+			}
+		}
+
+		if (!$full) $string = array_slice($string, 0, 1);
+		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 	public static function price($n, $precision = 2)
 	{
@@ -146,9 +177,6 @@ class Response_helper
 	public static function render($file, $var = []){
 		extract($var);
 		include str_replace("system", "application/views", BASEPATH)."/".$file.".php";
-	}
-	public static function test(){
-		return "berhasil";
 	}
 	public static function get_nama_karyawan($kode_rab)
 	{

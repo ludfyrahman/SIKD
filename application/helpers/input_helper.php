@@ -21,11 +21,26 @@ class Input_helper
 		}
 		return $char;
 	}
-	public static function uploadImage($file, $dir){
+	public static function uploadImage($file, $dir, $name){
 
-		move_uploaded_file($file['tmp_name'], str_replace("system", "assets/upload/", BASEPATH)."/$dir/$file[name]");
+		move_uploaded_file($file['tmp_name'], str_replace("system", "assets/upload/", BASEPATH)."/$dir/$name");
 	}
-	
+	public static function validateTypeUpload($array, $file){
+            
+        if(in_array($file['type'], $array)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    public static function validateSizeUpload($limit, $file){
+        // 39092  = 39 kb
+        if($file['size'] > $limit){
+            return false;
+        }else{
+            return true;
+        }
+    }
 	public static function bersihkanangka($kalimat){
 		$re = array();
 		$re[0] = ".";

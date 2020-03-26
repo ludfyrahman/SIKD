@@ -1,5 +1,8 @@
+<?php
+$ci = get_instance();
+?>
 <div class="col-md-3">
-    <a href="compose.html" class="btn btn-primary btn-block margin-bottom">Tambah</a>
+    <a href="<?= base_url("admin/".$ci->uri->segment(2)."/add")?>" class="btn btn-primary btn-block margin-bottom">Tambah</a>
 
     <div class="box box-solid">
     <div class="box-header with-border">
@@ -12,13 +15,14 @@
     </div>
     <div class="box-body no-padding">
         <ul class="nav nav-pills nav-stacked">
-        <li class="active"><a href="#"><i class="fa fa-inbox"></i> Surat Masuk
-            <span class="label label-primary pull-right">12</span></a></li>
-        <li><a href="#"><i class="fa fa-envelope-o"></i> Surat Keluar</a></li>
-        <li><a href="#"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-        <li><a href="#"><i class="fa fa-filter"></i> Junk <span class="label label-warning pull-right">65</span></a>
+        <li class="<?= ($ci->uri->segment(2) == 'surat_masuk' &&  $ci->uri->segment(4) =="" ? 'active' : '') ?>">
+            <a href="<?= base_url("admin/surat_masuk")?>"><i class="fa fa-inbox"></i> Surat Masuk
+                <!-- <span class="label label-primary pull-right">12</span> -->
+            </a>
         </li>
-        <li><a href="#"><i class="fa fa-trash-o"></i> Trash</a></li>
+        <li class="<?= ($ci->uri->segment(2) == 'surat_keluar' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_keluar")?>"><i class="fa fa-envelope-o"></i> Surat Keluar</a></li>
+        <li class="<?= ($ci->uri->segment(2) == 'draft' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_keluar")?>"><i class="fa fa-file-text-o"></i> Draft</a></li>
+        <li class="<?= ($ci->uri->segment(4) == 'sampah' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_masuk/index/sampah")?>"><i class="fa fa-trash-o"></i> Trash</a></li>
         </ul>
     </div>
     <!-- /.box-body -->

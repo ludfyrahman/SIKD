@@ -337,7 +337,7 @@
     )
 
     //Date picker
-    $('#datepicker').datepicker({
+    $('[id="datepicker"]').datepicker({
       autoclose: true
     })
 
