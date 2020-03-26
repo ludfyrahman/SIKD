@@ -47,9 +47,7 @@
 <div class="wrapper">
     
     <?php
-    // if(!$_SESSION['id']){
-    //   redirect(base_url());
-    // }
+      Auth_Helper::secure();
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/navbar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/content.php";

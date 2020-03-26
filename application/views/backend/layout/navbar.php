@@ -216,7 +216,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-              <span class="hidden-xs">Alexander Pierce</span>
+              <span class="hidden-xs"><?= Auth_helper::Get('nama') ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -224,8 +224,8 @@
                 <img src="<?= base_url() ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
                 <p>
-                  Alexander Pierce - Web Developer
-                  <small>Member since Nov. 2012</small>
+                  <?= Auth_helper::Get('nama') ?>
+                  <small>Member since <?= Auth_helper::Get('created_at') ?></small>
                 </p>
               </li>
               <!-- Menu Body -->

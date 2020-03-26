@@ -27,40 +27,47 @@
           <form action="" method="post">
             <div class="row">
               <div class="form-group col-md-6">
-                  <label>Kode</label>
-                  <input type="text" value='<?= Input_Helper::postOrOr('id', $data['id']) ?>' name="id" class="form-control" placeholder="Masukkan kode" required>
-              </div>
-              <div class="form-group col-md-6">
                   <label>Nama</label>
                   <input type="text" value='<?= Input_Helper::postOrOr('nama', $data['nama']) ?>' name="nama" class="form-control" placeholder="Masukkan nama" required>
               </div>
               <div class="form-group col-md-6">
-                  <label>Parent</label>
-                  <select class="form-control select2" name="id_parent" style="width: 100%;">
-                  <option value=""></option>
+                  <label>Email</label>
+                  <input type="email" value='<?= Input_Helper::postOrOr('email', $data['email']) ?>' name="email" class="form-control" placeholder="Masukkan email anda" required>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Password</label>
+                  <input type="password" value='<?= Input_Helper::postOrOr('password') ?>' name="password" class="form-control" placeholder="Masukkan password anda" <?= ($type == 'Tambah' ? 'required' : '') ?>>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Password Konfirmasi</label>
+                  <input type="password" value='<?= Input_Helper::postOrOr('password_konfirmasi') ?>' name="password_konfirmasi" class="form-control" placeholder="Masukkan password konfirmasi anda" <?= ($type == 'Tambah' ? 'required' : '') ?>>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Level</label>
+                  <select class="form-control select2" name="level" style="width: 100%;">
                   <?php
-                  $at = Input_Helper::postOrOr('id_parent', $data['id_parent']);
-                  foreach ($parent as $a) {
+                  $level = Input_Helper::postOrOr('level', $data['level']);
+                  for ($i=1; $i < count(LEVEL); $i++) {
                   ?>
-                    <option <?= ($at == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
+                    <option <?= ($level == $i ? "selected" : "")?> value="<?= $i ?>"><?= LEVEL[$i] ?></option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
                   <?php } ?>
                   </select>
               </div>
               <div class="form-group col-md-6">
-                  <label>Retensi</label>
-                  <select class="form-control select2" name="id_retensi" style="width: 100%;">
+                  <label>Status</label>
+                  <select class="form-control select2" name="status" style="width: 100%;">
                   <?php
-                  $ret = Input_Helper::postOrOr('id_retensi', $data['id_retensi']);
-                  foreach ($retensi as $r) {
+                  $status = Input_Helper::postOrOr('status', $data['status']);
                   ?>
-                    <option <?= ($ret == $r['id'] ? "selected" : "")?> value="<?= $r['id'] ?>"><?= $r['jenis'] ?></option>
-                  <?php } ?>
+                    <option <?= ($status == 1 ? "selected" : "")?> value="1">Aktif</option>
+                    <option <?= ($status == 0 ? "selected" : "")?> value="0">Tidak Aktif</option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
                   </select>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
               </div>
-              
             </div>
           </form>
           <!-- /.row -->
