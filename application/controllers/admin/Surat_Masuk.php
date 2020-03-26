@@ -8,26 +8,26 @@ class Surat_Masuk extends CI_Controller {
 		$this->content = "surat/masuk";
 		$this->cap = "Surat Masuk";
 		date_default_timezone_set('Asia/Jakarta');
-		// if(!isset($_SESSION['kode_user'])){
-		// 	redirect(base_url());
-		// }
 		if($this->uri->segment(3) == "add" && $_SERVER['REQUEST_METHOD'] == "POST"){
 		  $this->store($this->uri->segment(4));
 		}else if($this->uri->segment(3) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
 		  $this->update($this->uri->segment(4), $this->uri->segment(5));
 		}
     }
-    public function index(){
+    public function index($val = null){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->content/index";
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id")->result_array();
+		$value = ($val == null ? 1 : $val);
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id where sm.status='$value'")->result_array();
         $this->load->view('backend/index',$data);
     }
 	public function detail($id)	{
 		$data['title'] = "Detail $this->cap";
 		$data['content'] = "$this->content/_detail";
 		$data['type'] = 'Detail';
-		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
+		$data['data'] = $this->db->query("SELECT sm.*, j.nama as jenis, p.nama as media, k.nama as klasifikasi FROM $this->low sm 
+		JOIN jenis j ON sm.id_jenis=j.id JOIN pengirim p ON sm.id_media_pengirim=p.id
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE sm.id='$id'")->row_array();		
 		
 		$this->load->view('backend/index',$data);
 	}

@@ -74,19 +74,15 @@
             <span>Klasifikasi</span>
           </a>
         </li>
-        <li class="treeview <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
-          <a href="#">
+        <li class=" <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/surat_masuk') ?>">
             <i class="fa fa-file-archive-o"></i>
             <span>Arsip</span>
             <span class="pull-right-container">
               <span class="label label-warning pull-right">3</span>
             </span>
           </a>
-          <ul class="treeview-menu">
-            <li class="<?= ($this->uri->segment(2) == "surat_masuk" ? 'active' : '') ?>"><a href="<?= base_url('admin/surat_masuk') ?>"><i class="fa fa-circle-o"></i> Masuk</a></li>
-            <li class="<?= ($this->uri->segment(2) == "surat_keluar" ? 'active' : '') ?>"><a href="<?= base_url('admin/surat_keluar') ?>"><i class="fa fa-circle-o"></i> Keluar</a></li>
-            <li class="<?= ($this->uri->segment(2) == "draf" ? 'active' : '') ?>"><a href="<?= base_url('admin/draf') ?>"><i class="fa fa-circle-o"></i> Draf</a></li>
-          </ul>
+          
         </li>
         <li class="treeview">
           <a href="#">

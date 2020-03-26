@@ -30,25 +30,28 @@
             <div class="box-body no-padding">
               <div class="mailbox-read-info">
                 <h3>No Surat <?= $data['no_surat'] ?></h3>
-                <h5>Dari:<?= $data['pengirim'] ?>
+                <h5>Tujuan:<?= $data['tujuan'] ?>
                   <span class="mailbox-read-time pull-right"><?= $data['created_at'] ?></span></h5>
               </div>
               <div class=" mailbox-read-info">
                 <div class="row">
                   <div class="col-md-6">
-                    <h5>Klasifikasi :<?= $data['no_surat'] ?></h5>
+                    <h5>Klasifikasi :<?= $data['klasifikasi'] ?></h5>
                   </div>
                   <div class="col-md-6">
-                    <h5>Tanggal Surat :<?= $data['no_surat'] ?></h5>
+                    <h5>Tanggal Dirikim :<?= $data['tanggal_dikirim'] ?></h5>
                   </div>
                   <div class="col-md-6">
-                    <h5>Jenis :<?= $data['no_surat'] ?></h5>
+                    <h5>Tujuan :<?= $data['tujuan'] ?></h5>
                   </div>
                   <div class="col-md-6">
-                    <h5>Media Pengirim :<?= $data['no_surat'] ?></h5>
+                    <h5>Perihal :<?= $data['perihal'] ?></h5>
                   </div>
                   <div class="col-md-6">
-                    <h5>Tanggal Retensi :<?= $data['no_surat'] ?></h5>
+                    <h5>Media Pengirim :<?= $data['media'] ?></h5>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Keterangan :<?= $data['keterangan'] ?></h5>
                   </div>
                 </div>
               </div>

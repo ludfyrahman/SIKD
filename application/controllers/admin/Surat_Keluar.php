@@ -17,18 +17,20 @@ class Surat_Keluar extends CI_Controller {
 		  $this->update($this->uri->segment(4), $this->uri->segment(5));
 		}
     }
-    public function index(){
+    public function index($val = null){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->content/index";
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id")->result_array();
+		$value = ($val == null ? 1 : $val);
+		$data['data'] = $this->db->query("SELECT sk.*, k.nama as klasifikasi FROM $this->low sk JOIN klasifikasi k ON sk.id_klasifikasi=k.id where sk.status='$value'")->result_array();
         $this->load->view('backend/index',$data);
     }
 	public function detail($id)	{
 		$data['title'] = "Detail $this->cap";
 		$data['content'] = "$this->content/_detail";
 		$data['type'] = 'Detail';
-		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
-		
+		$data['data'] = $this->db->query("SELECT sk.*, p.nama as media, k.nama as klasifikasi FROM $this->low sk 
+		JOIN pengirim p ON sk.id_media_pengirim=p.id
+		JOIN klasifikasi k ON sk.id_klasifikasi=k.id WHERE sk.id='$id'")->row_array();
 		$this->load->view('backend/index',$data);
 	}
 	public function add()
@@ -55,16 +57,17 @@ class Surat_Keluar extends CI_Controller {
 			[
 				'id_klasifikasi' => $this->input->post('id_klasifikasi'), 
 				'no_surat' => $this->input->post('no_surat'), 
-				'tanggal_surat' => $this->input->post('tanggal_surat'), 
-				'pengirim' => $this->input->post('pengirim'), 
-				'id_jenis' => $this->input->post('id_jenis'), 
-				'id_media_pengirim' => $this->input->post('id_media_pengirim'), 
-				'tanggal_mulai_retensi' => date('Y-m-d', strtotime($this->input->post('tanggal_mulai_retensi'))), 
+				'tujuan' => $this->input->post('tujuan'), 
+				'perihal' => $this->input->post('perihal'), 
+				'keterangan' => $this->input->post('keterangan'), 
+				// 'id_jenis' => $this->input->post('id_jenis'), 
+				// 'id_media_pengirim' => $this->input->post('id_media_pengirim'), 
+				'tanggal_dikirim' => date('Y-m-d', strtotime($this->input->post('tanggal_dikirim'))), 
 				'file' => $this->input->post('no_surat').".$typefile", 
 				'created_by' => $_SESSION['userid'],  
 			];
 			if(Input_Helper::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'], $f['file'])){
-				Input_Helper::uploadImage($f['file'], 'surat/masuk', $this->input->post('no_surat').".$typefile");
+				Input_Helper::uploadImage($f['file'], 'surat/keluar', $this->input->post('no_surat').".$typefile");
 				$this->db->insert("$this->low", $arr);
 				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 				redirect(base_url("admin/$this->low/"));

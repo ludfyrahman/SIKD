@@ -64,7 +64,7 @@
                   <tr>
                     <td><input type="checkbox"></td>
                     <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                    <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$d['id']) ?>"><?= $d['pengirim'] ?></a></td>
+                    <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$d['id']) ?>"><?= $d['tujuan'] ?></a></td>
                     <td class="mailbox-subject"><?= $d['klasifikasi'] ?>
                     </td>
                     <td class="mailbox-attachment">

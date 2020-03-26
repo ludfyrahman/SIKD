@@ -31,12 +31,12 @@
                   <input type="text" value='<?= Input_Helper::postOrOr('no_surat', $data['no_surat']) ?>' name="no_surat" class="form-control" placeholder="Masukkan Nomor Surat" required>
               </div>
               <div class="form-group col-md-6">
-                  <label>Tanggal Surat</label>
-                  <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_surat', $data['tanggal_surat']) ?>' name="tanggal_surat" class="form-control" placeholder="Masukkan Tanggal Surat" required>
+                  <label>Tujuan Surat</label>
+                  <input type="text" value='<?= Input_Helper::postOrOr('tujuan', $data['tujuan']) ?>' name="tujuan" class="form-control" placeholder="Masukkan Tujuan" required>
               </div>
               <div class="form-group col-md-6">
-                  <label>Pengirim Surat</label>
-                  <input type="text" value='<?= Input_Helper::postOrOr('pengirim', $data['pengirim']) ?>' name="pengirim" class="form-control" placeholder="Masukkan Pengirim" required>
+                  <label>Perihal</label>
+                  <input type="text" value='<?= Input_Helper::postOrOr('perihal', $data['perihal']) ?>' name="perihal" class="form-control" placeholder="Masukkan Perihal" required>
               </div>
               <div class="form-group col-md-6">
                   <label>Klasifikasi</label>
@@ -72,12 +72,16 @@
                   </select>
               </div>
               <div class="form-group col-md-6">
-                  <label>Tanggal Mulai Retensi</label>
-                  <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_mulai_retensi', $data['tanggal_mulai_retensi']) ?>' name="tanggal_mulai_retensi" class="form-control" placeholder="Masukkan Tanggal Mulai Retensi" required>
+                  <label>Tanggal Dikirim</label>
+                  <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_dikirim', $data['tanggal_dikirim']) ?>' name="tanggal_dikirim" class="form-control" placeholder="Masukkan Tanggal Dikirim" required>
               </div>
               <div class="form-group col-md-6">
                   <label>File</label>
                   <input type="file" name="file" class="form-control" required>
+              </div>
+              <div class="form-group col-md-12">
+                  <label>Keterangan</label>
+                  <textarea name="keterangan" placeholder="Masukkan keterangan" class="form-control" id="" cols="30" rows="10"><?= Input_Helper::postOrOr('keterangan', $data['keterangan']) ?></textarea>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
