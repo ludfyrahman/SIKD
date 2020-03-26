@@ -25,10 +25,9 @@
             $field = "
             <tr>
                   <th>No</th>
+                  <th>Kode</th>
                   <th>Nama</th>
-                  <th>Email</th>
-                  <th>Level</th>
-                  <th>Status</th>
+                  <th>Retensi</th>
                   <th>Aksi</th>
                 </tr>
             ";
@@ -45,14 +44,12 @@
                     ?>
                   <tr>
                     <td><?= $no ?></td>
+                    <td><?= $d['id'] ?></td>
                     <td><?= $d['nama'] ?></td>
-                    <td><?= $d['email'] ?></td>
-                    <td><?= LEVEL[$d['level']] ?></td>
-                    <td><?= STATUS_PENGGUNA[$d['status']] ?></td>
+                    <td><?= $d['retensi'] ?></td>
                     <td>
-                        <a href="<?= base_url('admin/pengguna/delete/'.$d['id']) ?>" class="delete"><span class="badge bg-red"><i class="fa fa-trash"></i></span></a>
-                        <a href="<?= base_url('admin/pengguna/edit/'.$d['id']) ?>"><span class="badge bg-yellow"><i class="fa fa-pencil"></i></span></a>
-                        <!-- <a href="<?= base_url('admin/pengguna/detail/'.$d['id']) ?>"><span class="badge bg-blue"><i class="fa fa-book"></i></span></a> -->
+                        <a href="<?= base_url("admin/$this->low/delete/".$d['id']) ?>" class="delete"><span class="badge bg-red"><i class="fa fa-trash"></i></span></a>
+                        <a href="<?= base_url("admin/$this->low/edit/".$d['id']) ?>"><span class="badge bg-yellow"><i class="fa fa-pencil"></i></span></a>
                     </td>
                   </tr>
                   <?php $no++;} ?>

@@ -40,13 +40,13 @@
         </li>
         <li  class="<?= ($this->uri->segment(2) == "jabatan" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/jabatan') ?>">
-            <i class="fa fa-user"></i>
+            <i class="fa fa-list"></i>
             <span>Jabatan</span>
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "pengirim" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengirim') ?>">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-truck"></i>
             <span>Pengirim</span>
           </a>
         </li>
@@ -58,13 +58,13 @@
         </li>
         <li  class="<?= ($this->uri->segment(2) == "jenis" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/jenis') ?>">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-th-list"></i>
             <span>Jenis</span>
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "retensi" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/retensi') ?>">
-            <i class="fa fa-pie-chart"></i>
+            <i class="fa fa-bookmark"></i>
             <span>Retensi</span>
           </a>
         </li>
@@ -74,33 +74,18 @@
             <span>Klasifikasi</span>
           </a>
         </li>
-        <li class="treeview" class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
+        <li class="treeview <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
           <a href="#">
-            <i class="fa fa-pie-chart"></i>
-            <span>Klasifikasi</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/charts/chartjs.html"><i class="fa fa-circle-o"></i> ChartJS</a></li>
-            <li><a href="pages/charts/morris.html"><i class="fa fa-circle-o"></i> Morris</a></li>
-            <li><a href="pages/charts/flot.html"><i class="fa fa-circle-o"></i> Flot</a></li>
-            <li><a href="pages/charts/inline.html"><i class="fa fa-circle-o"></i> Inline charts</a></li>
-          </ul>
-        </li>
-        <li class="treeview" class="<?= ($this->uri->segment(2) == "arsip" ? 'active' : '') ?>">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
+            <i class="fa fa-file-archive-o"></i>
             <span>Arsip</span>
             <span class="pull-right-container">
               <span class="label label-warning pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Masuk</a></li>
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Terkirim</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Draf</a></li>
+            <li class="<?= ($this->uri->segment(2) == "surat_masuk" ? 'active' : '') ?>"><a href="<?= base_url('admin/surat_masuk') ?>"><i class="fa fa-circle-o"></i> Masuk</a></li>
+            <li class="<?= ($this->uri->segment(2) == "surat_keluar" ? 'active' : '') ?>"><a href="<?= base_url('admin/surat_keluar') ?>"><i class="fa fa-circle-o"></i> Keluar</a></li>
+            <li class="<?= ($this->uri->segment(2) == "draf" ? 'active' : '') ?>"><a href="<?= base_url('admin/draf') ?>"><i class="fa fa-circle-o"></i> Draf</a></li>
           </ul>
         </li>
         <li class="treeview">
