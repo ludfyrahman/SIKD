@@ -26,7 +26,10 @@ class Site extends CI_Controller { //mengextends CI_Controller
                 }
 
                 $a = $a[0];
-
+                if($a['status'] == 0) {
+                    $this->session->set_flashdata("message", ['danger', 'Login gagal, Akun anda sedang dinonaktifkan', ' Gagal']);
+                    return $this->index();
+                }
                 if(!password_verify($d['password'], $a['password'])) {
                     $this->session->set_flashdata("message", ['danger', 'Login gagal, Password anda salah', ' Gagal']);
                     return $this->index();
