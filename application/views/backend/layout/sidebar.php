@@ -82,7 +82,15 @@
               <span class="label label-warning pull-right">3</span>
             </span>
           </a>
-          
+        </li>
+        <li class=" <?= ($this->uri->segment(2) == "site"  ? 'active' : '') ?>">
+          <a href="<?= base_url('site/backup') ?>">
+            <i class="fa fa-file-archive-o"></i>
+            <span>Database</span>
+            <span class="pull-right-container">
+              <span class="label label-warning pull-right">3</span>
+            </span>
+          </a>
         </li>
         <li class="treeview">
           <a href="#">

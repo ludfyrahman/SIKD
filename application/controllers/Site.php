@@ -45,6 +45,27 @@ class Site extends CI_Controller { //mengextends CI_Controller
             echo "gagal";
         }
     }
+    public function database(){
+        $data['title'] = "DataBase";
+		$data['content'] = "database/index";
+        $this->load->view('backend/index',$data);
+    }
+    public function backup(){
+        $this->load->dbutil();
+        $prefs = array(
+            'format' => 'zip',
+            'filename' => 'my_backup.zip'
+        );
+        $backup =& $this->dbutil->backup($prefs);
+        $db_name = 'backup_on'.date('Y-m-d-H-i-s').".zip";
+        $save = base_url('assets/').$db_name;
+        $this->load->helper('file');
+        write_file($save, $backup);
+        $this->load->helper('download');
+        force_download($db_name, $backup);
+        $this->session->set_flashdata("message", ['success', "Berhasil Backup File", ' Berhasil']);
+        redirect(base_url("site/database"));
+    }
     public function logout(){
         // session_unset("userid");
         // session_unset("userlevel");
