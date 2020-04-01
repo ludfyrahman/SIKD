@@ -74,6 +74,12 @@
             <span>Klasifikasi</span>
           </a>
         </li>
+        <li  class="<?= ($this->uri->segment(2) == "hak_akses" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/hak_akses') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Hak Akses</span>
+          </a>
+        </li>
         <li class=" <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/surat_masuk') ?>">
             <i class="fa fa-file-archive-o"></i>
