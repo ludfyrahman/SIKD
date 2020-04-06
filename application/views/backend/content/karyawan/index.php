@@ -15,7 +15,7 @@
           <div class="box">
             <div class="box-header">
               <h3 class="box-title"><?= $title ?></h3>
-              <a href="<?= base_url('admin')."/".$this->uri->segment(2)."/add" ?>">
+              <a href="<?= base_url('admin')."/karyawan/$this->low/add" ?>">
                 <button class="btn btn-primary pull-right">Tambah</button>
               </a>
             </div>
@@ -46,8 +46,8 @@
                     <td><?= $d['nama'] ?></td>
                     <td><?= $d['keterangan'] ?></td>
                     <td>
-                        <a href="<?= base_url("admin/$this->low/delete/".$d['id']) ?>" class="delete"><span class="badge bg-red"><i class="fa fa-trash"></i></span></a>
-                        <a href="<?= base_url("admin/$this->low/edit/".$d['id']) ?>"><span class="badge bg-yellow"><i class="fa fa-pencil"></i></span></a>
+                    <a href="<?= base_url("admin/karyawan/$this->low/delete/".$d['id']) ?>" class="delete"><span class="badge bg-red"><i class="fa fa-trash"></i></span></a>
+                        <a href="<?= base_url("admin/karyawan/$this->low/edit/".$d['id']) ?>"><span class="badge bg-yellow"><i class="fa fa-pencil"></i></span></a>
                     </td>
                   </tr>
                   <?php $no++;} ?>

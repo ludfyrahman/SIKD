@@ -10,10 +10,10 @@ class Golongan extends CI_Controller {
 		// if(!isset($_SESSION['kode_user'])){
 		// 	redirect(base_url());
 		// }
-		if($this->uri->segment(3) == "add" && $_SERVER['REQUEST_METHOD'] == "POST"){
-		  $this->store($this->uri->segment(4));
-		}else if($this->uri->segment(3) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
-		  $this->update($this->uri->segment(4), $this->uri->segment(5));
+		if($this->uri->segment(4) == "add" && $_SERVER['REQUEST_METHOD'] == "POST"){
+		  $this->store();
+		}else if($this->uri->segment(4) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
+		  $this->update($this->uri->segment(5), $this->uri->segment(5));
 		}
     }
     public function index(){
@@ -39,16 +39,16 @@ class Golongan extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'deskripsi' => $this->input->post('deskripsi'), 
+				'status' => $this->input->post('status'), 
 				'created_by' => $_SESSION['userid'],  
 			];
 			$this->db->insert("$this->low",$arr);
 			$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/karyawan/$this->low/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Tambah Data $this->cap", ' Gagal']);
-			redirect(base_url("admin/$this->low/add"));
+			redirect(base_url("admin/karyawan/$this->low/add"));
 			// $this->add();
 		}
 	}
@@ -67,18 +67,18 @@ class Golongan extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'deskripsi' => $this->input->post('deskripsi'),
+				'status' => $this->input->post('status'), 
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],
 			];
 			
 			$this->session->set_flashdata("message", ['success', "Ubah $this->cap Berhasil", ' Berhasil']);
 			$this->db->update("$this->low",$arr, ['id' => $id]);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/karyawan/$this->low/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Edit Data $this->cap", ' Gagal']);
-			redirect(base_url("admin/$this->low/edit/".$id));
+			redirect(base_url("admin/karyawan/$this->low/edit/".$id));
 			// $this->add();
 		}
 	}
