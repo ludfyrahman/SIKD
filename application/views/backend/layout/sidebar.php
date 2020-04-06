@@ -30,12 +30,25 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+        <li class="treeview <?= ($this->uri->segment(2) == 'karyawan' || $this->uri->segment(2) == 'bagian' || $this->uri->segment(2) == 'jabatan' || $this->uri->segment(2) == 'golongan' || $this->uri->segment(2) == 'pendidikan' ? 'active' : '') ?>">
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Karyawan</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">4</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= ($this->uri->segment(3) == 'karyawan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/karyawan') ?>"><i class="fa fa-circle-o"></i>Data Karyawan</a></li>
+            <li class="<?= ($this->uri->segment(3) == 'bagian' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/bagian') ?>"><i class="fa fa-circle-o"></i> Bagian</a></li>
+            <li class="<?= ($this->uri->segment(3) == 'jabatan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/jabatan') ?>"><i class="fa fa-circle-o"></i> Jabatan</a></li>
+            <li class="<?= ($this->uri->segment(3) == 'golongan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/golongan') ?>"><i class="fa fa-circle-o"></i> Golongan</a></li>
+            <li class="<?= ($this->uri->segment(3) == 'pendidikan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/pendidikan') ?>"><i class="fa fa-circle-o"></i> Pendidikan</a></li>
+          </ul>
+        </li>
         <li class="<?= ($this->uri->segment(2) == "pengguna" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengguna') ?>">
             <i class="fa fa-users"></i> <span>Pengguna</span>
-            <!-- <span class="pull-right-container">
-              <small class="label pull-right bg-green">new</small>
-            </span> -->
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "jabatan" ? 'active' : '') ?>">
@@ -93,25 +106,8 @@
           <a href="<?= base_url('site/backup') ?>">
             <i class="fa fa-file-archive-o"></i>
             <span>Database</span>
-            <span class="pull-right-container">
-              <span class="label label-warning pull-right">3</span>
-            </span>
+            
           </a>
-        </li>
-        <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-          </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
         </li>
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">MENU</li>
