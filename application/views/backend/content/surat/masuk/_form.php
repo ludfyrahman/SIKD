@@ -76,6 +76,28 @@
                   <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_mulai_retensi', $data['tanggal_mulai_retensi']) ?>' name="tanggal_mulai_retensi" class="form-control" placeholder="Masukkan Tanggal Mulai Retensi" required>
               </div>
               <div class="form-group col-md-6">
+                  <label>Retensi</label>
+                  <select class="form-control select2" name="id_media_pengirim" style="width: 100%;">
+                  <?php
+                  $imp = Input_Helper::postOrOr('id_media_pengirim', $data['id_media_pengirim']);
+                  foreach ($pengiriman as $p) {
+                  ?>
+                    <option <?= ($imp == $p['id'] ? "selected" : "")?> value="<?= $p['id'] ?>"><?= $p['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Akses</label>
+                  <select class="form-control select2" name="id_media_pengirim" style="width: 100%;">
+                  <?php
+                  $imp = Input_Helper::postOrOr('id_media_pengirim', $data['id_media_pengirim']);
+                  foreach ($akses as $a) {
+                  ?>
+                    <option <?= ($imp == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
                   <label>File</label>
                   <input type="file" name="file" class="form-control" required>
               </div>

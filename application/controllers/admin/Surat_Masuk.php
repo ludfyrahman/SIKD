@@ -40,6 +40,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['klasifikasi'] = $this->db->get("klasifikasi")->result_array();
 		$data['jenis'] = $this->db->get("jenis")->result_array();
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
+		$data['akses'] = $this->db->get("hak_akses")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
 		$this->load->view('backend/index',$data);
 		// Response_Helper::render('backend/index', $data);
