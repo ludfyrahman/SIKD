@@ -38,7 +38,7 @@
             <i class="fa fa-user"></i>
             <span>Karyawan</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
+              <span class="label label-primary pull-right">5</span>
             </span>
           </a>
           <ul class="treeview-menu">
