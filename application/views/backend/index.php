@@ -48,6 +48,9 @@
     
     <?php
       Auth_Helper::secure();
+      $ci=& get_instance();
+      $ci->load->database();
+      $notifikasi_surat = $ci->db->get_where("surat_masuk", ['dibaca' => 0])->result_array();
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/navbar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/content.php";

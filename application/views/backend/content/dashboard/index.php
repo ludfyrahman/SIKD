@@ -150,51 +150,38 @@
         <!-- right col (We are only adding the ID to make the widgets sortable)-->
         <section class="col-lg-5 connectedSortable">
 
-          <!-- solid sales graph -->
-          <div class="box box-solid bg-teal-gradient">
+          <!-- TO DO List -->
+          <div class="box box-primary">
             <div class="box-header">
-              <i class="fa fa-th"></i>
-
-              <h3 class="box-title">Sales Graph</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
+              <i class="ion ion-clipboard"></i>
+              <h3 class="box-title">Surat Masuk</h3>
             </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;"></div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <!-- See dist/js/pages/dashboard.js to activate the todoList plugin -->
+              <ul class="timeline">
+                <!-- timeline time label -->
+                <?php 
+                foreach ($notifikasi_surat_masuk as $d) {
+                ?>
+                <!-- timeline item -->
+                <li>
+                  <i class="fa fa-list bg-yellow"></i>
+
+                  <div class="timeline-item">
+                    <span class="time"><i class="fa fa-clock-o"></i> <?= Response_Helper::time($d['created_at']) ?></span>
+
+                    <h3 class="timeline-header">No Surat <?= $d['no_surat']."[".$d['pengirim']."]" ?></h3>
+                  </div>
+                </li>
+                <?php } ?>
+                <!-- END timeline item -->
+                <li>
+                  <i class="fa fa-clock-o bg-gray"></i>
+                </li>
+              </ul>
             </div>
             <!-- /.box-body -->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
           </div>
           <!-- /.box -->
 
