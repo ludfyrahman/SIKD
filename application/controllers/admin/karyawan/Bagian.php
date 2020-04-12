@@ -39,7 +39,9 @@ class Bagian extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'deskripsi' => $this->input->post('deskripsi'), 
+				'tindasan' => $this->input->post('tindasan'), 
+				'grup' => $this->input->post('grup'), 
+				'status' => $this->input->post('status'), 
 				'created_by' => $_SESSION['userid'],  
 			];
 			$this->db->insert("$this->low",$arr);
@@ -67,7 +69,9 @@ class Bagian extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'deskripsi' => $this->input->post('deskripsi'),
+				'tindasan' => $this->input->post('tindasan'), 
+				'grup' => $this->input->post('grup'), 
+				'status' => $this->input->post('status'), 
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],
 			];

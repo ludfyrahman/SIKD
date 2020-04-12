@@ -26,7 +26,9 @@
             <tr>
                   <th>No</th>
                   <th>Nama</th>
-                  <th>Deskripsi</th>
+                  <th>Grup</th>
+                  <th>Tindasan</th>
+                  <th>Status Bagian</th>
                   <th>Aksi</th>
                 </tr>
             ";
@@ -44,7 +46,9 @@
                   <tr>
                     <td><?= $no ?></td>
                     <td><?= $d['nama'] ?></td>
-                    <td><?= $d['deskripsi'] ?></td>
+                    <td><?= BAGIAN[$d['grup']] ?></td>
+                    <td><?= STATUS_PENGGUNA[$d['tindasan']] ?></td>
+                    <td><?= STATUS_PENGGUNA[$d['status']] ?></td>
                     <td>
                     <a href="<?= base_url("admin/karyawan/$this->low/delete/".$d['id']) ?>" class="delete"><span class="badge bg-red"><i class="fa fa-trash"></i></span></a>
                         <a href="<?= base_url("admin/karyawan/$this->low/edit/".$d['id']) ?>"><span class="badge bg-yellow"><i class="fa fa-pencil"></i></span></a>

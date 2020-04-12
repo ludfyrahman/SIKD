@@ -68,7 +68,7 @@
                     <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?= $data['file'] ?></a>
                         <span class="mailbox-attachment-size">
                           1,245 KB
-                          <a target="_blank" href="<?= base_url('assets/upload/surat/masuk/'.$data['file']) ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                          <a target="_blank" href="<?= base_url('assets/upload/surat/keluar/'.$data['file']) ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                         </span>
                   </div>
                 </li>

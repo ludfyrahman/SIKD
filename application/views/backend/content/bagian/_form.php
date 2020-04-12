@@ -26,14 +26,42 @@
         <div class="box-body">
           <form action="" method="post">
             <div class="row">
-              <div class="form-group col-md-12">
+              <div class="form-group col-md-6">
                   <label>Nama</label>
-                  <input type="text" value='<?= Input_Helper::postOrOr('nama', $data['nama']) ?>' name="nama" class="form-control" placeholder="Masukkan nama anda" required>
+                  <input type="text" value='<?= Input_Helper::postOrOr('nama', $data['nama']) ?>' name="nama" class="form-control" placeholder="Masukkan nama " required>
               </div>
-             
-              <div class="form-group col-md-12">
-                  <label>Deskripsi</label>
-                  <textarea name="deskripsi" class="form-control" id="" cols="30" rows="10"><?= Input_Helper::postOrOr('deskripsi', $data['deskripsi']) ?></textarea>
+              <div class="form-group col-md-6">
+                  <label>Grub Bagian</label>
+                  <select class="form-control select2" name="grup" style="width: 100%;">
+                  <?php
+                  $grup = Input_Helper::postOrOr('grup', $data['grup']);
+                  for ($i=0; $i < count(BAGIAN); $i++) {
+                  ?>
+                    <option <?= ($grup == $i ? "selected" : "")?> value="<?= $i ?>"><?= BAGIAN[$i] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Status</label>
+                  <select class="form-control select2" name="status" style="width: 100%;">
+                  <?php
+                  $status = Input_Helper::postOrOr('status', $data['status']);
+                  ?>
+                    <option <?= ($status == 1 ? "selected" : "")?> value="1">Aktif</option>
+                    <option <?= ($status == 0 ? "selected" : "")?> value="0">Tidak Aktif</option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Status Tindasan</label>
+                  <select class="form-control select2" name="tindasan" style="width: 100%;">
+                  <?php
+                  $tindasan = Input_Helper::postOrOr('tindasan', $data['tindasan']);
+                  ?>
+                    <option <?= ($tindasan == 1 ? "selected" : "")?> value="1">Aktif</option>
+                    <option <?= ($tindasan == 0 ? "selected" : "")?> value="0">Tidak Aktif</option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
+                  </select>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>

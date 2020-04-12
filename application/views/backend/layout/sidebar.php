@@ -30,6 +30,9 @@
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
+        <?php
+        if($_SESSION['userlevel'] == 1){
+        ?>
         <li class="treeview <?= ($this->uri->segment(2) == 'karyawan' || $this->uri->segment(2) == 'bagian' || $this->uri->segment(2) == 'jabatan' || $this->uri->segment(2) == 'golongan' || $this->uri->segment(2) == 'pendidikan' ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-user"></i>
@@ -93,6 +96,7 @@
             <span>Hak Akses</span>
           </a>
         </li>
+        <?php } ?>
         <li class=" <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/surat_masuk') ?>">
             <i class="fa fa-file-archive-o"></i>
