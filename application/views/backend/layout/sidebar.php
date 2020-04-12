@@ -54,12 +54,6 @@
             <i class="fa fa-users"></i> <span>Pengguna</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "jabatan" ? 'active' : '') ?>">
-          <a href="<?= base_url('admin/jabatan') ?>">
-            <i class="fa fa-list"></i>
-            <span>Jabatan</span>
-          </a>
-        </li>
         <li  class="<?= ($this->uri->segment(2) == "pengirim" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengirim') ?>">
             <i class="fa fa-truck"></i>

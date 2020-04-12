@@ -61,6 +61,7 @@ class Klasifikasi extends CI_Controller {
 		$data['title'] = "Ubah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['type'] = 'Ubah';
+		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
 		$data['parent'] = $this->db->query("SELECT * FROM $this->low")->result_array();
 		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);
