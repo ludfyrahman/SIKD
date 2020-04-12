@@ -19,17 +19,35 @@ class Karyawan extends CI_Controller {
     public function index(){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->low/index";
-		$data['data'] = $this->db->get("$this->low")->result_array();
+		$data['data'] = $this->db->query("SELECT k.*, j.nama as jabatan FROM $this->low k JOIN jabatan j ON k.id_jabatan=j.id")->result_array();
         $this->load->view('backend/index',$data);
     }
-	
+	public function detail($id)	{
+		$data['content'] = "$this->low/_detail";
+		$data['type'] = 'Detail';
+		$data['title'] = "Detail $this->cap";
+		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();
+		$id_bagian = $data['data']['id_bagian'];
+		$id_jabatan = $data['data']['id_jabatan'];
+		$id_golongan = $data['data']['id_golongan'];
+		$id_pendidikan = $data['data']['id_pendidikan'];
+		$data['bagian'] = $this->db->query("SELECT * FROM bagian WHERE id = '$id_bagian'")->row_array();
+		$data['jabatan'] = $this->db->query("SELECT * FROM jabatan WHERE id = '$id_jabatan'")->row_array();
+		$data['golongan'] = $this->db->query("SELECT * FROM golongan WHERE id = '$id_golongan'")->row_array();
+		$data['pendidikan'] = $this->db->query("SELECT * FROM pendidikan WHERE id = '$id_pendidikan'")->row_array();
+		
+		$this->load->view('backend/index',$data);
+	}
 	public function add()
 	{
 		$data['title'] = "Tambah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['data'] = null;
 		$data['type'] = 'Tambah';
-		$data['atasan'] = $this->db->query("SELECT * FROM $this->low")->result_array();
+		$data['bagian'] = $this->db->query("SELECT * FROM bagian")->result_array();
+		$data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
+		$data['golongan'] = $this->db->query("SELECT * FROM golongan")->result_array();
+		$data['pendidikan'] = $this->db->query("SELECT * FROM pendidikan")->result_array();
 		$this->load->view('backend/index',$data);
 		// Response_Helper::render('backend/index', $data);
 	}
@@ -40,8 +58,14 @@ class Karyawan extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'id_parent' => $this->input->post('atasan'), 
-				'keterangan' => $this->input->post('keterangan'), 
+				'tanggal_lahir' => date('Y-m-d', strtotime($this->input->post('tanggal_lahir'))), 
+				'jenis_kelamin' => $this->input->post('jenis_kelamin'), 
+				'id_bagian' => $this->input->post('id_bagian'), 
+				'id_jabatan' => $this->input->post('id_jabatan'), 
+				'id_golongan' => $this->input->post('id_golongan'), 
+				'id_pendidikan' => $this->input->post('id_pendidikan'), 
+				'status' => $this->input->post('status'), 
+				'alamat' => $this->input->post('alamat'),
 				'created_by' => $_SESSION['userid'],  
 			];
 			$this->db->insert("$this->low",$arr);
@@ -59,7 +83,10 @@ class Karyawan extends CI_Controller {
 		$data['title'] = "Ubah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['type'] = 'Ubah';
-		$data['atasan'] = $this->db->query("SELECT * FROM $this->low")->result_array();
+		$data['bagian'] = $this->db->query("SELECT * FROM bagian")->result_array();
+		$data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
+		$data['golongan'] = $this->db->query("SELECT * FROM golongan")->result_array();
+		$data['pendidikan'] = $this->db->query("SELECT * FROM pendidikan")->result_array();
 		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);
 	}
@@ -70,8 +97,13 @@ class Karyawan extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
-				'id_parent' => $this->input->post('atasan'), 
-				'keterangan' => $this->input->post('keterangan'), 
+				'tanggal_lahir' => date('Y-m-d', strtotime($this->input->post('tanggal_lahir'))), 
+				'jenis_kelamin' => $this->input->post('jenis_kelamin'), 
+				'id_bagian' => $this->input->post('id_bagian'), 
+				'id_jabatan' => $this->input->post('id_jabatan'), 
+				'id_golongan' => $this->input->post('id_golongan'), 
+				'id_pendidikan' => $this->input->post('id_pendidikan'), 
+				'status' => $this->input->post('status'), 
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],
 			];
@@ -91,11 +123,11 @@ class Karyawan extends CI_Controller {
 		try{
 			$this->db->delete("$this->low", ['id' => $id]);
 			$this->session->set_flashdata("message", ['success', "Berhasil Hapus Data $this->cap", 'Berhasil']);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/karyawan/$this->low/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Hapus Data $this->cap", 'Gagal']);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/$this->low/karyawan"));
 		}
 	}
 }

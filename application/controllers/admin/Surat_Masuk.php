@@ -50,7 +50,7 @@ class Surat_Masuk extends CI_Controller {
 		$d = $_POST;
 		$f = $_FILES;
 		try{
-			// print_r($f);
+			
 			$typefile = Response_Helper::getformatfile($f['file']['name']);
 			$arr =
 			[
@@ -66,7 +66,12 @@ class Surat_Masuk extends CI_Controller {
 			];
 			if(Input_Helper::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'], $f['file'])){
 				Input_Helper::uploadImage($f['file'], 'surat/masuk', $this->input->post('no_surat').".$typefile");
+				$akses = explode(',', $d['akses']);
 				$this->db->insert("$this->low", $arr);
+				$id  = $this->db->insert_id();
+				for ($i=0; $i < count($akses) ; $i++) { 
+					$this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_bagian'=> $akses[$i]]);
+				}
 				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 				redirect(base_url("admin/$this->low/"));
 			}else{

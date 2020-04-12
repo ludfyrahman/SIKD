@@ -89,5 +89,9 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 define("LEVEL", array('', 'Super Admin', 'Admin', 'Sekretaris', 'Kepala'));
 define("BAGIAN", array('DIREKSI', 'BAGIAN KANTOR DIREKSI', 'UNIT KERJA', 'AGROWISATA', 'LAIN LAIN'));
 define("STATUS_PENGGUNA", array('Tidak Aktif', 'Aktif'));
+
 define("TYPE_LOG", array('menghapus', 'menambah','edit', 'konfirmasi', 'menolak'));
 define("TYPE_LOG_COLOR", array('red', 'blue','yellow', 'green', 'maroon-gradient'));
+
+
+define("GENDER", array('Perempuan', 'Laki laki'));

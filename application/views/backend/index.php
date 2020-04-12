@@ -258,6 +258,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
+<script>var BASEURL = '<?= base_url() ?>';</script>
 <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

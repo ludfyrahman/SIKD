@@ -40,7 +40,7 @@
               </div>
               <div class="form-group col-md-6">
                   <label>Klasifikasi</label>
-                  <select class="form-control select2" name="id_klasifikasi" style="width: 100%;">
+                  <select class="form-control select2 klasifikasi" name="id_klasifikasi" style="width: 100%;">
                   <?php
                   $kl = Input_Helper::postOrOr('id_klasifikasi', $data['id_klasifikasi']);
                   foreach ($klasifikasi as $k) {
@@ -77,23 +77,17 @@
               </div>
               <div class="form-group col-md-6">
                   <label>Retensi</label>
-                  <select class="form-control select2" name="id_media_pengirim" style="width: 100%;">
-                  <?php
-                  $imp = Input_Helper::postOrOr('id_media_pengirim', $data['id_media_pengirim']);
-                  foreach ($pengiriman as $p) {
-                  ?>
-                    <option <?= ($imp == $p['id'] ? "selected" : "")?> value="<?= $p['id'] ?>"><?= $p['nama'] ?></option>
-                  <?php } ?>
-                  </select>
+                  <input type="text" disabled class="form-control" id="retensi" value="Retensi">
               </div>
               <div class="form-group col-md-6">
                   <label>Akses</label>
-                  <select class="form-control select2" name="id_media_pengirim" style="width: 100%;">
+                  <input type="hidden" name="akses" id="aksesvalue">
+                  <select class="form-control select2 akses"  multiple="multiple" data-placeholder="Select a State" >
                   <?php
-                  $imp = Input_Helper::postOrOr('id_media_pengirim', $data['id_media_pengirim']);
+                  $aks = Input_Helper::postOrOr('akses', $data['akses']);
                   foreach ($akses as $a) {
                   ?>
-                    <option <?= ($imp == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
+                    <option <?= ($aks == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
                   <?php } ?>
                   </select>
               </div>
@@ -102,7 +96,7 @@
                   <input type="file" name="file" class="form-control" required>
               </div>
               <div class="col-md-12">
-                <button class="btn btn-primary"><?= $type ?></button>
+                <button class="btn btn-primary" ><?= $type ?></button>
               </div>
               
             </div>

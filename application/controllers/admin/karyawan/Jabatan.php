@@ -95,7 +95,7 @@ class Jabatan extends CI_Controller {
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Hapus Data $this->cap", 'Gagal']);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/karyawan/$this->low/"));
 		}
 	}
 }
