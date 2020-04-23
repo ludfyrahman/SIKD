@@ -42,7 +42,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li class="<?= ($this->uri->segment(3) == 'karyawan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/karyawan') ?>"><i class="fa fa-circle-o"></i>Data Karyawan</a></li>
+            <!-- <li class="<?= ($this->uri->segment(3) == 'karyawan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/karyawan') ?>"><i class="fa fa-circle-o"></i>Data Karyawan</a></li> -->
             <li class="<?= ($this->uri->segment(3) == 'bagian' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/bagian') ?>"><i class="fa fa-circle-o"></i> Bagian</a></li>
             <li class="<?= ($this->uri->segment(3) == 'jabatan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/jabatan') ?>"><i class="fa fa-circle-o"></i> Jabatan</a></li>
             <li class="<?= ($this->uri->segment(3) == 'golongan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/golongan') ?>"><i class="fa fa-circle-o"></i> Golongan</a></li>

@@ -20,22 +20,49 @@ class Surat_Masuk extends CI_Controller {
 		$value = ($val == null ? 1 : ($val == 'sampah' ? 0 : 1));
 		$akses = "";
 		$akses_id = "";
-		if($_SESSION['userlevel'] != 1){
+		// if($_SESSION['userlevel'] != 1){
 			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
-			$akses_id .=" AND smt.id_bagian=1";
-		}
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses where sm.status='$value' $akses_id")->result_array();
+			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
+		// }
+		$data['inbox'] = $this->db->query("SELECT sm.id, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id  where sm.status='$value' and sm.created_by=$_SESSION[userid]")->result_array();
         $this->load->view('backend/index',$data);
     }
 	public function detail($id)	{
 		$data['title'] = "Detail $this->cap";
 		$data['content'] = "$this->content/_detail";
 		$data['type'] = 'Detail';
-		$data['data'] = $this->db->query("SELECT sm.*, j.nama as jenis, p.nama as media, k.nama as klasifikasi FROM $this->low sm 
+		$tembusan = "";
+		$tembusan_data = "";
+		if($_SESSION['userid'] !=1){
+			$tembusan.=" JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+			$tembusan_data = ", smt.id_pengguna ";
+		}
+		$data['data'] = $this->db->query("SELECT sm.*, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
 		JOIN jenis j ON sm.id_jenis=j.id JOIN pengirim p ON sm.id_media_pengirim=p.id
+		$tembusan
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE sm.id='$id'")->row_array();		
-		
+		$data['pengguna'] = $this->db->get_where("pengguna")->result_array();
+		// echo "<pre>";
+		// print_r($data);
+		if($data['data']['id_pengguna'] == $_SESSION['userid']){
+			$this->db->update("surat_masuk_tembusan", ['dilihat' => 1], ['id_surat' => $id, 'id_pengguna' => $_SESSION['userid']]);
+			// echo "berhasil";
+		}
 		$this->load->view('backend/index',$data);
+	}
+	public function teruskan($id){
+		$d = $_POST;
+		if($d){
+			$akses = explode(',', $d['akses']);
+			for ($i=0; $i < count($akses) ; $i++) {
+				$this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_pengguna'=> $akses[$i]]);
+			}
+			$this->session->set_flashdata("message", ['success', "Berhasil Teruskan Arsip", ' Berhasil']);
+			redirect(base_url("admin/$this->low/"));
+		}
 	}
 	public function add()
 	{
@@ -48,6 +75,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
 		$data['akses'] = $this->db->get("hak_akses")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
+		$data['berkas'] = $this->db->get("berkas")->result_array();
 		$this->load->view('backend/index',$data);
 		// Response_Helper::render('backend/index', $data);
 	}
@@ -75,8 +103,8 @@ class Surat_Masuk extends CI_Controller {
 				$akses = explode(',', $d['akses']);
 				$this->db->insert("$this->low", $arr);
 				$id  = $this->db->insert_id();
-				for ($i=0; $i < count($akses) ; $i++) { 
-					$this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_bagian'=> $akses[$i]]);
+				for ($i=0; $i < count($akses) ; $i++) {
+					$this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_pengguna'=> $akses[$i]]);
 				}
 				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 				redirect(base_url("admin/$this->low/"));

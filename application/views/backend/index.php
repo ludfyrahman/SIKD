@@ -50,7 +50,11 @@
       Auth_Helper::secure();
       $ci=& get_instance();
       $ci->load->database();
-      $notifikasi_surat = $ci->db->get_where("surat_masuk", ['dibaca' => 0])->result_array();
+      $akses ="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+      $akses_id =" AND smt.id_pengguna=$_SESSION[userid] AND dilihat=0";
+      $notifikasi_surat = $ci->db->query("SELECT sm.id, sm.pengirim,sm.no_surat, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+      JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+      JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/navbar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/sidebar.php";
       include str_replace("system", "application/views/backend/", BASEPATH)."/layout/content.php";

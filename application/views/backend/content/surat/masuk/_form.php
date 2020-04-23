@@ -39,6 +39,17 @@
                   <input type="text" value='<?= Input_Helper::postOrOr('pengirim', $data['pengirim']) ?>' name="pengirim" class="form-control" placeholder="Masukkan Pengirim" required>
               </div>
               <div class="form-group col-md-6">
+                  <label>Berkas</label>
+                  <select class="form-control select2 berkas" name="id_berkas" style="width: 100%;">
+                  <?php
+                  $bk = Input_Helper::postOrOr('id_berkas', $data['id_berkas']);
+                  foreach ($berkas as $b) {
+                  ?>
+                    <option <?= ($bk == $b['id'] ? "selected" : "")?> value="<?= $b['id'] ?>"><?= "[".$b['id']."] ".$b['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
                   <label>Klasifikasi</label>
                   <select class="form-control select2 klasifikasi" name="id_klasifikasi" style="width: 100%;">
                   <?php
@@ -91,7 +102,7 @@
                   <?php } ?>
                   </select>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-12">
                   <label>File</label>
                   <input type="file" name="file" class="form-control" required>
               </div>

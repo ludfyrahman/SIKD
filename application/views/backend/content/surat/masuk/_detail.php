@@ -72,11 +72,13 @@
             <!-- /.box-footer -->
             <div class="box-footer">
               <div class="pull-right">
-                <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button>
-                <button type="button" class="btn btn-default"><i class="fa fa-share"></i> Forward</button>
+                <!-- <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button> -->
+                <?php if ($data['created_by'] == $_SESSION['userid']) {?>
+                <button type="button" data-toggle="modal" data-target="#forward" class="btn btn-default"><i class="fa fa-share"></i> Teruskan</button>
+                <?php } ?>
               </div>
-              <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button>
+              <!-- <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
+              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
             </div>
             <!-- /.box-footer -->
           </div>
@@ -87,4 +89,42 @@
       <!-- /.row -->
     </section>
     <!-- /.content -->
+  </div>
+  <div class="modal fade" id="forward">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Teruskan Arsip</h4>
+        </div>
+        <style>
+          .select2-container{
+            width:100%!important;
+          }
+        </style>
+        <form action="<?= base_url('admin/surat_masuk/teruskan/'.$data['id']) ?>" method="POST">
+        <div class="modal-body">
+          <div class="form-group">
+              <label>Akses</label>
+              <input type="hidden" name="akses" id="aksesvalue">
+              <select class="form-control select2 akses"  multiple="multiple" data-placeholder="Select a State" required>
+              <?php
+              $pg = Input_Helper::postOrOr('pengguna', $data['pengguna']);
+              foreach ($pengguna as $a) {
+              ?>
+                <option <?= ($pg == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
+              <?php } ?>
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+        </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
   </div>
