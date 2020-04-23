@@ -22,7 +22,7 @@ $ci = get_instance();
         </li>
         <li class="<?= ($ci->uri->segment(2) == 'surat_keluar' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_keluar")?>"><i class="fa fa-envelope-o"></i> Surat Keluar</a></li>
         <li class="<?= ($ci->uri->segment(2) == 'draft' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_keluar")?>"><i class="fa fa-file-text-o"></i> Draft</a></li>
-        <li class="<?= ($ci->uri->segment(4) == 'sampah' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_masuk/index/sampah")?>"><i class="fa fa-trash-o"></i> Trash</a></li>
+        <li class="<?= ($ci->uri->segment(4) == 'sampah' ? 'active' : '') ?>"><a href="<?= base_url("admin/surat_masuk/index/sampah")?>"><i class="fa fa-trash-o"></i> Arsip inaktif</a></li>
         </ul>
     </div>
     <!-- /.box-body -->

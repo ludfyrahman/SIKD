@@ -17,8 +17,14 @@ class Surat_Masuk extends CI_Controller {
     public function index($val = null){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->content/index";
-		$value = ($val == null ? 1 : $val);
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id where sm.status='$value'")->result_array();
+		$value = ($val == null ? 1 : ($val == 'sampah' ? 0 : 1));
+		$akses = "";
+		$akses_id = "";
+		if($_SESSION['userlevel'] != 1){
+			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+			$akses_id .=" AND smt.id_bagian=1";
+		}
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses where sm.status='$value' $akses_id")->result_array();
         $this->load->view('backend/index',$data);
     }
 	public function detail($id)	{

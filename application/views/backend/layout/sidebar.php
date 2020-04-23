@@ -72,6 +72,12 @@
             <span>Jenis</span>
           </a>
         </li>
+        <li class="<?= ($this->uri->segment(2) == "berkas" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/berkas') ?>">
+            <i class="fa fa-th-list"></i>
+            <span>Berkas</span>
+          </a>
+        </li>
         <li  class="<?= ($this->uri->segment(2) == "retensi" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/retensi') ?>">
             <i class="fa fa-bookmark"></i>

@@ -36,7 +36,7 @@
                       </div>
                       <h4>
                         <?=$d['pengirim']?>
-                        <small><i class="fa fa-clock-o"></i>No Surat <?= Response_Helper::time($d['created_at']) ?></small>
+                        <small><i class="fa fa-clock-o"></i><?= Response_Helper::time($d['created_at']) ?></small>
                       </h4>
                       <p><?= $d['no_surat'] ?></p>
                     </a>
