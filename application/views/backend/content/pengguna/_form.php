@@ -55,6 +55,17 @@
                   </select>
               </div>
               <div class="form-group col-md-6">
+                  <label>Jabatan</label>
+                  <select class="form-control select2" name="id_jabatan" style="width: 100%;">
+                  <?php
+                  $jab = Input_Helper::postOrOr('id_jabatan', $data['id_jabatan']);
+                  foreach ($jabatan as $j) {
+                  ?>
+                    <option <?= ($jab == $j['id'] ? "selected" : "")?> value="<?= $j['id'] ?>"><?= $j['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
                   <label>Status</label>
                   <select class="form-control select2" name="status" style="width: 100%;">
                   <?php

@@ -45,8 +45,9 @@
             <!-- <li class="<?= ($this->uri->segment(3) == 'karyawan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/karyawan') ?>"><i class="fa fa-circle-o"></i>Data Karyawan</a></li> -->
             <li class="<?= ($this->uri->segment(3) == 'bagian' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/bagian') ?>"><i class="fa fa-circle-o"></i> Bagian</a></li>
             <li class="<?= ($this->uri->segment(3) == 'jabatan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/jabatan') ?>"><i class="fa fa-circle-o"></i> Jabatan</a></li>
-            <li class="<?= ($this->uri->segment(3) == 'golongan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/golongan') ?>"><i class="fa fa-circle-o"></i> Golongan</a></li>
-            <li class="<?= ($this->uri->segment(3) == 'pendidikan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/pendidikan') ?>"><i class="fa fa-circle-o"></i> Pendidikan</a></li>
+            <li class="<?= ($this->uri->segment(3) == 'golongan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/golongan') ?>"><i class="fa fa-circle-o"></i> Golongan / Kabinet</a></li>
+            <!-- <li class="<?= ($this->uri->segment(3) == 'pendidikan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/pendidikan') ?>"><i class="fa fa-circle-o"></i> Pendidikan</a></li> -->
+            <!-- <li class="<?= ($this->uri->segment(3) == 'hak_akses' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/hak_akses') ?>"><i class="fa fa-circle-o"></i> Hak Akses</a></li> -->
           </ul>
         </li>
         <li class="<?= ($this->uri->segment(2) == "pengguna" ? 'active' : '') ?>">
@@ -90,12 +91,12 @@
             <span>Klasifikasi</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "hak_akses" ? 'active' : '') ?>">
+        <!-- <li  class="<?= ($this->uri->segment(2) == "hak_akses" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/hak_akses') ?>">
             <i class="fa fa-pie-chart"></i>
             <span>Hak Akses</span>
           </a>
-        </li>
+        </li> -->
         <?php } ?>
         <li class=" <?= ($this->uri->segment(2) == "surat_masuk" || $this->uri->segment(2) == "surat_keluar" || $this->uri->segment(2) == "draf" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/surat_masuk') ?>">

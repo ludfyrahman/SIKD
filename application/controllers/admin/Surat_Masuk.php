@@ -20,10 +20,10 @@ class Surat_Masuk extends CI_Controller {
 		$value = ($val == null ? 1 : ($val == 'sampah' ? 0 : 1));
 		$akses = "";
 		$akses_id = "";
-		// if($_SESSION['userlevel'] != 1){
+		if($_SESSION['userlevel'] != 1){
 			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
 			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
-		// }
+		}
 		$data['inbox'] = $this->db->query("SELECT sm.id, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
@@ -73,11 +73,12 @@ class Surat_Masuk extends CI_Controller {
 		$data['klasifikasi'] = $this->db->get("klasifikasi")->result_array();
 		$data['jenis'] = $this->db->get("jenis")->result_array();
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
-		$data['akses'] = $this->db->get("hak_akses")->result_array();
+		$data['hak_akses'] = $this->db->query("SELECT p.nama, j.nama as jabatan, p.id FROM pengguna p JOIN jabatan j ON p.id_jabatan=j.id")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
 		$data['berkas'] = $this->db->get("berkas")->result_array();
 		$this->load->view('backend/index',$data);
-		// Response_Helper::render('backend/index', $data);
+		// echo "<pre>";
+		// print_r($data);
 	}
 
 	public function store(){

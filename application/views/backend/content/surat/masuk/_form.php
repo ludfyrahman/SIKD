@@ -96,9 +96,9 @@
                   <select class="form-control select2 akses"  multiple="multiple" data-placeholder="Select a State" >
                   <?php
                   $aks = Input_Helper::postOrOr('akses', $data['akses']);
-                  foreach ($akses as $a) {
+                  foreach ($hak_akses as $a) {
                   ?>
-                    <option <?= ($aks == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama'] ?></option>
+                    <option <?= ($aks == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama']."[".$a['jabatan']."]" ?></option>
                   <?php } ?>
                   </select>
               </div>

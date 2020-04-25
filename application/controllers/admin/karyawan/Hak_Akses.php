@@ -19,7 +19,7 @@ class Hak_Akses extends CI_Controller {
     public function index(){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->low/index";
-		$data['data'] = $this->db->get("$this->low")->result_array();
+		$data['data'] = $this->db->query("SELECT * FROM jabatan")->result_array();
         $this->load->view('backend/index',$data);
     }
 	
