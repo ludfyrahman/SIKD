@@ -53,7 +53,7 @@ class Pengguna extends CI_Controller {
 			$arr =
 			[
 				'id_jabatan' => $this->input->post('id_jabatan'), 
-				'id_pengguna' => $idc, 
+				'id_pengguna' => $id, 
 				'created_by' => $_SESSION['userid'],  
 			];
 				$this->db->insert("hak_akses",$arr);

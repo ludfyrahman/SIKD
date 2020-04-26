@@ -126,40 +126,41 @@
       </div>
       <!-- /.row -->
       <div class="modal fade" id="forward">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title">Teruskan Arsip</h4>
-        </div>
-        <style>
-          .select2-container{
-            width:100%!important;
-          }
-        </style>
-        <form action="<?= base_url('admin/pengguna/add_jabatan/'.$data['id']) ?>" method="POST">
-        <div class="modal-body">
-          <div class="form-group">
-              <label>Jabatan</label>
-              <select class="form-control " name="id_jabatan" required>
-              <?php
-              $jb = Input_Helper::postOrOr('pengguna', $data['pengguna']);
-              foreach ($jabatan_all as $ja) {
-              ?>
-                <option <?= ($jb == $ja['id'] ? "selected" : "")?> value="<?= $ja['id'] ?>"><?= $ja['nama'] ?></option>
-              <?php } ?>
-              </select>
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Teruskan Arsip</h4>
+            </div>
+            <style>
+              .select2-container{
+                width:100%!important;
+              }
+            </style>
+            <form action="<?= base_url('admin/pengguna/add_jabatan/'.$data['id']) ?>" method="POST">
+            <div class="modal-body">
+              <div class="form-group">
+                  <label>Jabatan</label>
+                  <select class="form-control " name="id_jabatan" required>
+                  <?php
+                  $jb = Input_Helper::postOrOr('pengguna', $data['pengguna']);
+                  foreach ($jabatan_all as $ja) {
+                  ?>
+                    <option <?= ($jb == $ja['id'] ? "selected" : "")?> value="<?= $ja['id'] ?>"><?= $ja['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+            </form>
           </div>
+          <!-- /.modal-content -->
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Save changes</button>
-        </div>
-        </form>
       </div>
-      <!-- /.modal-content -->
-    </div>
     <!-- /.modal-dialog -->
     </section>
     <!-- /.content -->

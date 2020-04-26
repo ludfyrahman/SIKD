@@ -78,7 +78,7 @@
                 <?php } ?>
               </div>
               <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a>
-              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/tindak") ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a>
+              <a data-toggle="modal" data-target="#tindak" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a>
             </div>
             <!-- /.box-footer -->
           </div>
@@ -123,6 +123,42 @@
           <button type="submit" class="btn btn-primary">Save changes</button>
         </div>
         </form>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <div class="modal fade" id="tindak">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Teruskan Arsip</h4>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+              <label>Pilih Tindakan </label><br>
+              <?php 
+              if(in_array($data['status'], [1,3,4])){
+                if(in_array($data['status'], [1,4])){
+              ?>
+              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/sekarang/".$data['id_smt']) ?>"><button class="btn btn-info"><i class="fa fa-flash"></i> Tindak Lanjuti Sekarang</button></a>
+                <?php }
+                if(in_array($data['status'], [1])){ ?>
+              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/nanti/".$data['id_smt']) ?>"><button class="btn btn-warning"><i class="fa fa-clock-o"></i> Tindak Lanjuti Nanti</button></a>
+              <?php
+                } 
+              if(in_array($data['status'], [3])){
+              ?>
+              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/tidak/".$data['id_smt']) ?>"><button class="btn btn-danger"><i class="fa fa-close"></i> Tidak Tindak Lanjuti</button></a>
+              <?php }} ?>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+          <!-- <button type="submit" class="btn btn-primary">Save changes</button> -->
+        </div>
       </div>
       <!-- /.modal-content -->
     </div>
