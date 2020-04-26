@@ -4,6 +4,7 @@ class Pengguna extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "pengguna";
 		$this->cap = "Pengguna";
 		$this->load->helper("Response_helper");

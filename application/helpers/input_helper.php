@@ -4,7 +4,7 @@
 */
 class Input_helper
 {
-
+	
 	public static function postOrOr($index, $a = '', $b = '')
 	{
 		if(isset($_POST[$index]) && $_POST[$index]!='')

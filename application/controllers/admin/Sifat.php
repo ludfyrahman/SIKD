@@ -4,6 +4,7 @@ class Sifat extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "sifat";
 		$this->cap = "Sifat";
 		date_default_timezone_set('Asia/Jakarta');

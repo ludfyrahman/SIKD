@@ -4,6 +4,7 @@ class Pengirim extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "pengirim";
 		$this->cap = "Pengirim";
 		date_default_timezone_set('Asia/Jakarta');

@@ -4,6 +4,7 @@ class Hak_Akses extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "hak_akses";
 		$this->cap = "Hak Akses";
 		date_default_timezone_set('Asia/Jakarta');

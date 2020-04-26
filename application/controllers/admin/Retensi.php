@@ -4,6 +4,7 @@ class Retensi extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "retensi";
 		$this->cap = "Retensi";
 		date_default_timezone_set('Asia/Jakarta');

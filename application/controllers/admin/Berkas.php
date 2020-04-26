@@ -4,6 +4,7 @@ class Berkas extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "berkas";
 		$this->cap = "Berkas";
 		date_default_timezone_set('Asia/Jakarta');

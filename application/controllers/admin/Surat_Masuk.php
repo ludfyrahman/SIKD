@@ -4,6 +4,7 @@ class Surat_Masuk extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "surat_masuk";
 		$this->content = "surat/masuk";
 		$this->cap = "Surat Masuk";
@@ -13,6 +14,7 @@ class Surat_Masuk extends CI_Controller {
 		}else if($this->uri->segment(3) == "edit" && $_SERVER['REQUEST_METHOD'] == "POST"){
 		  $this->update($this->uri->segment(4), $this->uri->segment(5));
 		}
+		
     }
     public function index($val = null){
 		$data['title'] = "Data $this->cap";

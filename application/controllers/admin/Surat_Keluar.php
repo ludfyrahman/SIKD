@@ -4,6 +4,7 @@ class Surat_Keluar extends CI_Controller {
 	function __construct()
   	{
 		parent::__construct();
+		Auth_helper::secure();
 		$this->low = "surat_keluar";
 		$this->content = "surat/keluar";
 		$this->cap = "Surat Keluar";

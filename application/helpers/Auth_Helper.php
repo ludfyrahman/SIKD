@@ -3,7 +3,7 @@
 *
 */
 class Auth_helper{
-
+    
     public static function secure(){
         if(!isset($_SESSION['userid'])){
             redirect(base_url());
