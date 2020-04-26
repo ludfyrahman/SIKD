@@ -31,7 +31,7 @@ class Pengguna extends CI_Controller {
 		$data['title'] = "Tambah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['data'] = null;
-		$data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
+		// $data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
 		$data['type'] = 'Tambah';
 		$this->load->view('backend/index',$data);
 		// Response_Helper::render('backend/index', $data);
@@ -73,7 +73,6 @@ class Pengguna extends CI_Controller {
 				'nama' => $this->input->post('nama'), 
 				'email' => $this->input->post('email'), 
 				'level' => $this->input->post('level'), 
-				'id_jabatan' => $this->input->post('id_jabatan'),
 				'created_by' => $_SESSION['userid'],  
 				'status' => $this->input->post('status')
 			];
@@ -98,7 +97,7 @@ class Pengguna extends CI_Controller {
 		$data['title'] = "Ubah $this->cap";
 		$data['content'] = "$this->low/_form";
 		$data['type'] = 'Ubah';
-		$data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
+		// $data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
 		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);
 	}
@@ -111,7 +110,6 @@ class Pengguna extends CI_Controller {
 				'nama' => $this->input->post('nama'), 
 				'email' => $this->input->post('email'), 
 				'level' => $this->input->post('level'), 
-				'id_jabatan' => $this->input->post('id_jabatan'), 
 				'status' => $this->input->post('status'),
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],

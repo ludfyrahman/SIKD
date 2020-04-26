@@ -77,7 +77,13 @@
                 <button type="button" data-toggle="modal" data-target="#forward" class="btn btn-default"><i class="fa fa-share"></i> Teruskan</button>
                 <?php } ?>
               </div>
-              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a>
+              <?php
+              if(isset($data['status'])){
+                ?>
+                <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a>
+                <?php
+              }
+              ?>
               <a data-toggle="modal" data-target="#tindak" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a>
             </div>
             <!-- /.box-footer -->

@@ -90,7 +90,7 @@
                   <label>Retensi</label>
                   <input type="text" disabled class="form-control" id="retensi" value="Retensi">
               </div>
-              <div class="form-group col-md-6">
+              <!-- <div class="form-group col-md-6">
                   <label>Akses</label>
                   <input type="hidden" name="akses" id="aksesvalue">
                   <select class="form-control select2 akses"  multiple="multiple" data-placeholder="Select a State" >
@@ -101,8 +101,8 @@
                     <option <?= ($aks == $a['id'] ? "selected" : "")?> value="<?= $a['id'] ?>"><?= $a['nama']."[".$a['jabatan']."]" ?></option>
                   <?php } ?>
                   </select>
-              </div>
-              <div class="form-group col-md-12">
+              </div> -->
+              <div class="form-group col-md-6">
                   <label>File</label>
                   <input type="file" name="file" class="form-control" required>
               </div>

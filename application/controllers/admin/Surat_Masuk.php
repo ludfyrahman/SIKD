@@ -89,14 +89,14 @@ class Surat_Masuk extends CI_Controller {
 		$data['title'] = "Detail $this->cap";
 		$data['content'] = "$this->content/_detail";
 		$data['type'] = 'Detail';
-		// $tembusan = "";
-		// $tembusan_data = "";
+		$tembusan = "";
+		$tembusan_data = "";
 		$user = "";
-		$tembusan =" JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
-		$tembusan_data = ", smt.id_pengguna, smt.status, smt.id as id_smt ";
+		$cek = $this->db->get_where("surat_masuk", ['id' => $id])->row_array();
 		$where = "sm.id='$id'";
-		if($_SESSION['userlevel'] !=1){
-			
+		if($cek['created_by'] != $_SESSION['userid']){
+			$tembusan =" JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+			$tembusan_data = ", smt.id_pengguna, smt.status, smt.id as id_smt ";
 			$user = " AND smt.id_pengguna=$_SESSION[userid]";
 			$where = " smt.id_surat='$id'";
 		}
@@ -146,9 +146,9 @@ class Surat_Masuk extends CI_Controller {
 		$data['klasifikasi'] = $this->db->get("klasifikasi")->result_array();
 		$data['jenis'] = $this->db->get("jenis")->result_array();
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
-		$data['hak_akses'] = $this->db->query("SELECT p.nama, j.nama as jabatan, p.id FROM pengguna p JOIN jabatan j ON p.id_jabatan=j.id")->result_array();
+		// $data['hak_akses'] = $this->db->query("SELECT * from jabatan")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
-		$data['berkas'] = $this->db->get("berkas")->result_array();
+		$data['berkas'] = $this->db->get_where("berkas", ['status' => 1])->result_array();
 		$this->load->view('backend/index',$data);
 		// echo "<pre>";
 		// print_r($data);
@@ -164,9 +164,10 @@ class Surat_Masuk extends CI_Controller {
 			[
 				'id_klasifikasi' => $this->input->post('id_klasifikasi'), 
 				'no_surat' => $this->input->post('no_surat'), 
-				'tanggal_surat' => $this->input->post('tanggal_surat'), 
+				'tanggal_surat' => date('Y-m-d', strtotime($this->input->post('tanggal_surat'))), 
 				'pengirim' => $this->input->post('pengirim'), 
 				'id_jenis' => $this->input->post('id_jenis'), 
+				'id_berkas' => $this->input->post('id_berkas'), 
 				'id_media_pengirim' => $this->input->post('id_media_pengirim'), 
 				'tanggal_mulai_retensi' => date('Y-m-d', strtotime($this->input->post('tanggal_mulai_retensi'))), 
 				'file' => $this->input->post('no_surat').".$typefile", 
@@ -177,9 +178,9 @@ class Surat_Masuk extends CI_Controller {
 				$akses = explode(',', $d['akses']);
 				$this->db->insert("$this->low", $arr);
 				$id  = $this->db->insert_id();
-				for ($i=0; $i < count($akses) ; $i++) {
-					$this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_pengguna'=> $akses[$i]]);
-				}
+				// for ($i=0; $i < count($akses) ; $i++) {
+					// $this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_pengguna'=> $_SESSION['userid']]);
+				// }
 				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 				redirect(base_url("admin/$this->low/"));
 			}else{
