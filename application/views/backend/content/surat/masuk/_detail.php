@@ -77,8 +77,8 @@
                 <button type="button" data-toggle="modal" data-target="#forward" class="btn btn-default"><i class="fa fa-share"></i> Teruskan</button>
                 <?php } ?>
               </div>
-              <!-- <button type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</button>
-              <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Print</button> -->
+              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a>
+              <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/tindak") ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a>
             </div>
             <!-- /.box-footer -->
           </div>

@@ -26,36 +26,105 @@ class Surat_Masuk extends CI_Controller {
 			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
 			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
 		}
-		$data['inbox'] = $this->db->query("SELECT sm.id, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		$search = "";
+		if(isset($_POST['search'])){
+			$val = $_POST['search'];
+			$search .=" AND sm.pengirim like '%$val%' OR k.nama like '%$val%' ";
+		}
+		$data['inbox'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' GROUP BY smt.id_surat")->result_array();
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id  where sm.status='$value' and sm.created_by=$_SESSION[userid]")->result_array();
-		// echo "<pre>";
-		// print_r($data);
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' AND  smt.status=1 GROUP BY smt.id_surat")->result_array();
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id  where sm.status='$value' and sm.created_by=$_SESSION[userid] $search")->result_array();
+		$data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
+		$data['sekarang'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' AND  smt.status=3 GROUP BY smt.id_surat")->result_array();
+		$data['nanti'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' AND  smt.status=4 GROUP BY smt.id_surat")->result_array();
+		$data['tidak_ditindak'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' AND  smt.status=5 GROUP BY smt.id_surat")->result_array();
 		$this->load->view('backend/index',$data);
-    }
+	}
+	public function pencarian($val = null){
+		$akses = "";
+		$akses_id = "";
+		if($_SESSION['userlevel'] != 1){
+			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
+		}
+		$search = "";
+		if(isset($_POST['search'])){
+			$val = $_POST['search'];
+			$search .=" AND (sm.pengirim like '%$val%' OR k.nama like '%$val%') ";
+		}
+		$value = ($val == 'sampah' ? 0 : 1);
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id  where sm.status='$value' and smt.status=1 and sm.created_by=$_SESSION[userid] $search")->result_array();
+		$this->load->view("backend/content/surat/masuk/_list_arsip", $data);
+
+	}
+	public function pencarian_arsip($val = null){
+		$akses = "";
+		$akses_id = "";
+		if($_SESSION['userlevel'] != 1){
+			$akses .="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
+		}
+		$search = "";
+		if(isset($_POST['search'])){
+			$val = $_POST['search'];
+			$search .=" AND (sm.pengirim like '%$val%' OR k.nama like '%$val%') ";
+		}
+		$value = ($val == 'sampah' ? 0 : 1);
+		$data['inbox'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $search GROUP BY smt.id_surat")->result_array();
+		$this->load->view("backend/content/surat/masuk/_list", $data);
+
+	}
 	public function detail($id)	{
 		$data['title'] = "Detail $this->cap";
 		$data['content'] = "$this->content/_detail";
 		$data['type'] = 'Detail';
-		$tembusan = "";
-		$tembusan_data = "";
-		if($_SESSION['userid'] !=1){
-			$tembusan.=" JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
-			$tembusan_data = ", smt.id_pengguna ";
+		// $tembusan = "";
+		// $tembusan_data = "";
+		$user = "";
+		$tembusan =" JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
+		$tembusan_data = ", smt.id_pengguna, smt.status, smt.id as id_smt ";
+		$where = "sm.id='$id'";
+		if($_SESSION['userlevel'] !=1){
+			
+			$user = " AND smt.id_pengguna=$_SESSION[userid]";
+			$where = " smt.id_surat='$id'";
 		}
-		$data['data'] = $this->db->query("SELECT sm.*, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
+		$data['data'] = $this->db->query("SELECT sm.id, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
 		JOIN jenis j ON sm.id_jenis=j.id JOIN pengirim p ON sm.id_media_pengirim=p.id
 		$tembusan
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE sm.id='$id'")->row_array();		
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE $where $user")->row_array();		
 		$data['pengguna'] = $this->db->get_where("pengguna")->result_array();
-		// echo "<pre>";
-		// print_r($data);
-		if($data['data']['id_pengguna'] == $_SESSION['userid']){
-			$this->db->update("surat_masuk_tembusan", ['dilihat' => 1], ['id_surat' => $id, 'id_pengguna' => $_SESSION['userid']]);
-			// echo "berhasil";
+
+		if ($_SESSION['userlevel']!=1) {
+			if($data['data']['id_pengguna'] == $_SESSION['userid']){
+				$this->db->update("surat_masuk_tembusan", ['dilihat' => 1], ['id_surat' => $id, 'id_pengguna' => $_SESSION['userid']]);
+				// echo "berhasil";
+			}
 		}
 		$this->load->view('backend/index',$data);
+	}
+	public function aksi($status, $response, $id){
+		if ($response == 'sekarang') {
+			$this->db->update("surat_masuk_tembusan", ['status' => 3], ['id' => $id]);
+		}else if($response == 'berkas'){
+			$this->db->update("surat_masuk_tembusan", ['status' => 2], ['id' => $id]);
+		}else if ($response == 'nanti') {
+			$this->db->update("surat_masuk_tembusan", ['status' => 4], ['id' => $id]);
+		}else if ($response == 'tidak') {
+			$this->db->update("surat_masuk_tembusan", ['status' => 5], ['id' => $id]);
+		}
+		echo '<script>window.history.go(-2)</script>';
 	}
 	public function teruskan($id){
 		$d = $_POST;
