@@ -56,7 +56,7 @@ class Site extends CI_Controller { //mengextends CI_Controller
             'format' => 'zip',
             'filename' => 'my_backup.zip'
         );
-        $backup =& $this->dbutil->backup($prefs);
+        $backup = $this->dbutil->backup($prefs);
         $db_name = 'backup_on'.date('Y-m-d-H-i-s').".zip";
         $save = base_url('assets/').$db_name;
         $this->load->helper('file');

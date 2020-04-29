@@ -21,8 +21,6 @@
   <link rel="stylesheet" href="<?= base_url() ?>assets/dist/css/skins/_all-skins.min.css">
   <!-- Morris chart -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/morris.js/morris.css">
-  <!-- jvectormap -->
-  <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/jvectormap/jquery-jvectormap.css">
   <!-- Date Picker -->
   <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- Daterange picker -->
@@ -280,8 +278,6 @@
 <!-- Sparkline -->
 <script src="<?= base_url() ?>assets/vendor/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
 <!-- jvectormap -->
-<script src="<?= base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
-<script src="<?= base_url() ?>assets/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
 <!-- input mask -->
 <script src="<?= base_url() ?>assets/plugins/input-mask/jquery.inputmask.js"></script>
 <script src="<?= base_url() ?>assets/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
