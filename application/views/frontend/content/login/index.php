@@ -1,6 +1,7 @@
 <div class="login-box">
   <div class="login-logo">
-    <a href="../../index2.html"><b>SI</b>KD</a>
+    <!-- <a href="../../index2.html"><b>SI</b>KD</a> -->
+    <img src="<?= base_url('assets/img/logo.png') ?>" alt="" class="img-fluid" style="width:200px">
   </div>
   <!-- /.login-logo -->
   <div class="login-box-body">

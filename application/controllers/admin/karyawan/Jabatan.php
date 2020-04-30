@@ -92,7 +92,7 @@ class Jabatan extends CI_Controller {
 		try{
 			$this->db->delete("$this->low", ['id' => $id]);
 			$this->session->set_flashdata("message", ['success', "Berhasil Hapus Data $this->cap", 'Berhasil']);
-			redirect(base_url("admin/$this->low/"));
+			redirect(base_url("admin/karyawan/$this->low/"));
 			
 		}catch(Exception $e){
 			$this->session->set_flashdata("message", ['danger', "Gagal Hapus Data $this->cap", 'Gagal']);
