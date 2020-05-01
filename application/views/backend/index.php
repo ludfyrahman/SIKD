@@ -263,7 +263,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-<script>var BASEURL = '<?= base_url() ?>';</script>
+<script>var BASEURL = '<?= base_url() ?>';
+  var datachart = <?php echo json_encode($line)?>
+</script>
 <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->

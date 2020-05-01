@@ -17,8 +17,25 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
         $data['jabatan'] = $this->db->get("jabatan")->num_rows();
         $data['log'] = $this->db->query("SELECT * FROM log order by created_at desc LIMIT 10")->result_array();
         $data['day'] = $this->db->query("SELECT * FROM log GROUP BY DAY(created_at) LIMIT 5")->result_array();
+        
+        $surat = $this->db->query("SELECT COUNT(*) jumlah, created_at FROM surat_masuk GROUP BY DATE(created_at)")->result_array();
         // echo "<pre>";
-        // print_r($data);
+        // print_r($surat);
+        $data['line'] = [];
+        $i = 0;
+        foreach ($surat as $s) {
+            // array_push($array, $s);
+            // $array['y'] += "Surat";
+            // $array['item1'] += 2666;
+            // $array['item2'] += 2666;
+            $push =[
+                'y' => date('Y-m-d', strtotime($s['created_at'])),
+                'item1' => $s['jumlah'],
+                'item2' => $i,
+            ];
+            array_push($data['line'], $push);
+            $i++;
+        }
 		$this->load->view('backend/index',$data);
 
     }
