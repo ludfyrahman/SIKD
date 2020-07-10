@@ -12,14 +12,16 @@
     <tr>
         <td><input type="checkbox"></td>
         <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-        <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$i['id']) ?>"><?= $i['pengirim'] ?></a></td>
-        <td class="mailbox-subject"><?= $i['klasifikasi'] ?>
+        <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$i['id']) ?>"><?= strtolower($i['pengirim']) ?></a></td>
+        <td class="mailbox-subject"><?= strtolower($i['klasifikasi']) ?>
         </td>
         <td class="mailbox-attachment">
         <?= ($i['dilihat'] == 1 ? 'dilihat' : 'belum dilihat') ?>
         </td>
         <td class="mailbox-date"><?= Response_Helper::time($i['created_at']) ?></td>
     </tr>
+    
     <?php } ?>
+    
     </tbody>
 </table>

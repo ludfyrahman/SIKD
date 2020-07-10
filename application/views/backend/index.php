@@ -267,6 +267,92 @@
   var datachart = <?php echo json_encode($line)?>
 </script>
 <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
+<script>
+$("#search_mail_masuk").on("keyup", function() {
+    var search = $(this).val().toLowerCase();
+    $('#inbox table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+$("#search_arsip").on("keyup", function() {
+  var search = $(this).val().toLowerCase();
+    $('#arsip table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+$("#search_berkas").on("keyup", function() {
+  var search = $(this).val().toLowerCase();
+    $('#berkas table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+$("#search_tindak_sekarang").on("keyup", function() {
+  var search = $(this).val().toLowerCase();
+    $('#tindak_sekarang table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+$("#search_tindak_nanti").on("keyup", function() {
+  var search = $(this).val().toLowerCase();
+    $('#tindak_nanti table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+$("#search_tidak_ditindak").on("keyup", function() {
+  var search = $(this).val().toLowerCase();
+    $('#tidak_ditindak table tbody tr').hide();
+    var len = $('table tbody tr:not(.notfound) td:contains("'+search+'")').length;
+
+    if(len > 0){
+      // Searching text in columns and show match row
+      $('table tbody tr td:contains("'+search+'")').each(function(){
+        $(this).closest('tr').show();
+      });
+    }else{
+      $('.notfound').show();
+    }
+});
+</script>
 
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script src="<?= base_url() ?>assets/vendor/datatables.net/js/jquery.dataTables.min.js"></script>

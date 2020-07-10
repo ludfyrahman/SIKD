@@ -30,7 +30,7 @@
 
                     <div class="box-tools pull-right">
                       <div class="has-feedback">
-                        <input type="text" class="form-control input-sm" id="search_mail" placeholder="Search Mail">
+                        <input type="text" class="form-control input-sm" id="search_mail_masuk" placeholder="Search Mail">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                       </div>
                     </div>
@@ -65,55 +65,13 @@
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body no-padding">
-                    <div class="mailbox-controls">
-                      <!-- Check all button -->
-                      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                      </button>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                      </div>
-                      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                      <div class="pull-right">
-                        1-50/200
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                      </div>
-                      <!-- /.pull-right -->
-                    </div>
+                    
                     <div class="table-responsive mailbox-messages" id="arsip">
                       <?php  $this->load->view("backend/content/surat/masuk/_list_arsip") ?>
                     </div>
                     <!-- /.mail-box-messages -->
                   </div>
                   <!-- /.box-body -->
-                  <div class="box-footer no-padding">
-                    <div class="mailbox-controls">
-                      <!-- Check all button -->
-                      <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i>
-                      </button>
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
-                      </div>
-                      <!-- /.btn-group -->
-                      <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
-                      <div class="pull-right">
-                        1-50/200
-                        <div class="btn-group">
-                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
-                          <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
-                        </div>
-                        <!-- /.btn-group -->
-                      </div>
-                      <!-- /.pull-right -->
-                    </div>
-                  </div>
                 </div>
               </div>
               <div class="tab-pane" id="berkas">
@@ -123,7 +81,7 @@
 
                     <div class="box-tools pull-right">
                       <div class="has-feedback">
-                        <input type="text" class="form-control input-sm" id="search_mail" placeholder="Search Mail">
+                        <input type="text" class="form-control input-sm" id="search_berkas" placeholder="Search Mail">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>
                       </div>
                     </div>
@@ -131,7 +89,7 @@
                   </div>
                   <!-- /.box-header -->
                   <div class="box-body no-padding">
-                    <div class="table-responsive mailbox-messages" id="inbox">
+                    <div class="table-responsive mailbox-messages" id="berkas">
                     <table id="example2" class="table table-hover table-striped">
                         <tbody>
                         <?php 
@@ -146,8 +104,8 @@
                         <tr>
                             <td><input type="checkbox"></td>
                             <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                            <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$b['id']) ?>"><?= $b['pengirim'] ?></a></td>
-                            <td class="mailbox-subject"><?= $b['klasifikasi'] ?>
+                            <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$b['id']) ?>"><?=strtolower( $b['pengirim']) ?></a></td>
+                            <td class="mailbox-subject"><?= strtolower($b['klasifikasi']) ?>
                             </td>
                             <td class="mailbox-attachment">
                             <?= ($b['dilihat'] == 1 ? 'dilihat' : 'belum dilihat') ?>
@@ -173,7 +131,7 @@
 
                   <div class="box-tools pull-right">
                     <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" id="search_mail" placeholder="Search Mail">
+                      <input type="text" class="form-control input-sm" id="search_tindak_sekarang" placeholder="Search Mail">
                       <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </div>
@@ -181,7 +139,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <div class="table-responsive mailbox-messages" id="inbox">
+                  <div class="table-responsive mailbox-messages" id="tindak_sekarang">
                   <table id="example2" class="table table-hover table-striped">
                       <tbody>
                       <?php 
@@ -196,8 +154,8 @@
                       <tr>
                           <td><input type="checkbox"></td>
                           <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                          <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$s['id']) ?>"><?= $s['pengirim'] ?></a></td>
-                          <td class="mailbox-subject"><?= $s['klasifikasi'] ?>
+                          <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$s['id']) ?>"><?= strtolower($s['pengirim']) ?></a></td>
+                          <td class="mailbox-subject"><?= strtolower($s['klasifikasi']) ?>
                           </td>
                           <td class="mailbox-attachment">
                           <?= ($s['dilihat'] == 1 ? 'dilihat' : 'belum dilihat') ?>
@@ -223,7 +181,7 @@
 
                   <div class="box-tools pull-right">
                     <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" id="search_mail" placeholder="Search Mail">
+                      <input type="text" class="form-control input-sm" id="search_tindak_nanti" placeholder="Search Mail">
                       <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </div>
@@ -231,7 +189,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <div class="table-responsive mailbox-messages" id="inbox">
+                  <div class="table-responsive mailbox-messages" id="tindak_nanti">
                   <table id="example2" class="table table-hover table-striped">
                       <tbody>
                       <?php 
@@ -246,8 +204,8 @@
                       <tr>
                           <td><input type="checkbox"></td>
                           <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                          <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$n['id']) ?>"><?= $n['pengirim'] ?></a></td>
-                          <td class="mailbox-subject"><?= $n['klasifikasi'] ?>
+                          <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$n['id']) ?>"><?= strtolower($n['pengirim']) ?></a></td>
+                          <td class="mailbox-subject"><?= strtolower($n['klasifikasi']) ?>
                           </td>
                           <td class="mailbox-attachment">
                           <?= ($n['dilihat'] == 1 ? 'dilihat' : 'belum dilihat') ?>
@@ -273,7 +231,7 @@
 
                   <div class="box-tools pull-right">
                     <div class="has-feedback">
-                      <input type="text" class="form-control input-sm" id="search_mail" placeholder="Search Mail">
+                      <input type="text" class="form-control input-sm" id="search_tidak_ditindak" placeholder="Search Mail">
                       <span class="glyphicon glyphicon-search form-control-feedback"></span>
                     </div>
                   </div>
@@ -281,7 +239,7 @@
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body no-padding">
-                  <div class="table-responsive mailbox-messages" id="inbox">
+                  <div class="table-responsive mailbox-messages" id="tidak_ditindak">
                   <table id="example2" class="table table-hover table-striped">
                     <tbody>
                     <?php 
@@ -296,8 +254,8 @@
                     <tr>
                         <td><input type="checkbox"></td>
                         <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                        <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$td['id']) ?>"><?= $td['pengirim'] ?></a></td>
-                        <td class="mailbox-subject"><?= $td['klasifikasi'] ?>
+                        <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$td['id']) ?>"><?= strtolower($td['pengirim']) ?></a></td>
+                        <td class="mailbox-subject"><?= strtolower($td['klasifikasi']) ?>
                         </td>
                         <td class="mailbox-attachment">
                         <?= ($td['dilihat'] == 1 ? 'dilihat' : 'belum dilihat') ?>
