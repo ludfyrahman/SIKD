@@ -49,7 +49,10 @@
       $ci=& get_instance();
       $ci->load->database();
       $akses ="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
-      $akses_id =" AND smt.id_pengguna=$_SESSION[userid] AND dilihat=0";
+      $akses_id = "";
+      if($_SESSION['userlevel'] != 1 ){
+        $akses_id =" AND smt.id_pengguna=$_SESSION[userid] AND dilihat=0";
+      }
       $notifikasi_surat = $ci->db->query("SELECT sm.id, sm.pengirim,sm.no_surat, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
       JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
       JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();

@@ -9,7 +9,10 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
         $data['pengguna'] = $this->db->get_where("pengguna", ['status' => 1])->num_rows();
         $data['surat_masuk'] = $this->db->get_where("surat_masuk", ['status' => 1])->num_rows();
         $akses ="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
-        $akses_id =" AND smt.id_pengguna=$_SESSION[userid]";
+        $akses_id = "";
+        if($_SESSION['userlevel'] != 1 ){
+            $akses_id =" AND smt.id_pengguna=$_SESSION[userid]";
+        }
         $data['notifikasi_surat_masuk'] = $this->db->query("SELECT sm.id,sm.no_surat, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
