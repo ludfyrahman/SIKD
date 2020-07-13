@@ -91,8 +91,24 @@ $(document).ready(function () {
   });
 
   // The Calender
-  $('#calendar').datepicker();
-
+  // $('#calendar').datepicker({
+  //   onSelect: function(dateText, inst) { 
+  //     var dateAsString = dateText; //the first parameter of this function
+  //     var dateAsObject = $(this).datepicker( 'getDate' ); //the getDate method
+  //     console.log(dateAsString );
+  //  }
+  // });
+  // $("#calendar").click(function(){
+  //   alert();
+  // })
+  $("#calendar").datepicker({
+    todayHighlight: true,
+    format: 'yyyy-mm-dd',
+ }).on('changeDate', function(e) {
+  console.log(e.format());
+  $.redirect(BASEURL+"admin/surat_masuk", {'tanggal': e.format()});
+});
+$(".box-header .dropdown-toggle").hide();
   // SLIMSCROLL FOR CHAT WIDGET
   $('#chat-box').slimScroll({
     height: '250px'

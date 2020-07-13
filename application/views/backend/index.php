@@ -267,6 +267,7 @@
   var datachart = <?php echo json_encode($line)?>
 </script>
 <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
+<script src="<?= base_url() ?>assets/js/jquery.redirect.js"></script>
 <script>
 $("#search_mail_masuk").on("keyup", function() {
     var search = $(this).val().toLowerCase();
