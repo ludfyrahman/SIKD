@@ -91,7 +91,12 @@
                   <div class="box-body no-padding">
                     <div class="table-responsive mailbox-messages" id="berkas">
                     <table id="example2" class="table table-hover table-striped">
-                        <tbody>
+                      <thead>
+                          <tr>
+                              <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>
+                          </tr>
+                      </thead>
+                      <tbody>
                         <?php 
                         $no = 1;
                         if (count($berkas) < 1) {
@@ -141,7 +146,12 @@
                 <div class="box-body no-padding">
                   <div class="table-responsive mailbox-messages" id="tindak_sekarang">
                   <table id="example2" class="table table-hover table-striped">
-                      <tbody>
+                    <thead>
+                        <tr>
+                            <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>
+                        </tr>
+                    </thead>
+                    <tbody>
                       <?php 
                       $no = 1;
                       if (count($sekarang) < 1) {
@@ -191,7 +201,12 @@
                 <div class="box-body no-padding">
                   <div class="table-responsive mailbox-messages" id="tindak_nanti">
                   <table id="example2" class="table table-hover table-striped">
-                      <tbody>
+                    <thead>
+                        <tr>
+                            <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>
+                        </tr>
+                    </thead>
+                    <tbody>
                       <?php 
                       $no = 1;
                       if (count($nanti) < 1) {
@@ -241,6 +256,11 @@
                 <div class="box-body no-padding">
                   <div class="table-responsive mailbox-messages" id="tidak_ditindak">
                   <table id="example2" class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>
+                        </tr>
+                    </thead>
                     <tbody>
                     <?php 
                     $no = 1;

@@ -146,6 +146,7 @@
           <div class="form-group">
               <label>Pilih Tindakan </label><br>
               <?php 
+              if(isset($data['status']) && $_SESSION['userlevel']!=1){
               if(in_array($data['status'], [1,3,4])){
                 if(in_array($data['status'], [1,4])){
               ?>
@@ -158,7 +159,11 @@
               if(in_array($data['status'], [3])){
               ?>
               <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/tidak/".$data['id_smt']) ?>"><button class="btn btn-danger"><i class="fa fa-close"></i> Tidak Tindak Lanjuti</button></a>
-              <?php }} ?>
+              <?php }}}else{
+                if($_SESSION['userlevel'] == '1'){
+                  echo "<h3>Anda Tidak Bisa meneruskan arsip ini</h3>";
+                }
+              } ?>
           </div>
         </div>
         <div class="modal-footer">
