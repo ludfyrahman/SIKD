@@ -7,7 +7,7 @@ class Surat_Masuk extends CI_Controller {
 		Auth_helper::secure();
 		$this->low = "surat_masuk";
 		$this->content = "surat/masuk";
-		$this->cap = "Surat Masuk";
+		$this->cap = "Arsip";
 		date_default_timezone_set('Asia/Jakarta');
 		if($this->uri->segment(3) == "add" && $_SERVER['REQUEST_METHOD'] == "POST"){
 		  $this->store($this->uri->segment(4));
@@ -29,6 +29,9 @@ class Surat_Masuk extends CI_Controller {
 			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
 		}
 		$search = "";
+		if($_SESSION['userlevel'] != 1){
+			$search.=" AND s.status=1 ";
+		}
 		if(isset($_POST['search'])){
 			$val = $_POST['search'];
 			$search .=" AND sm.pengirim like '%$val%' OR k.nama like '%$val%' ";
@@ -40,7 +43,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['inbox'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=1 GROUP BY smt.id_surat")->result_array();
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id  where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id JOIN sifat s ON sm.id_sifat=s.id  where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
 		$data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
@@ -151,6 +154,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['type'] = 'Tambah';
 		$data['klasifikasi'] = $this->db->get("klasifikasi")->result_array();
 		$data['jenis'] = $this->db->get("jenis")->result_array();
+		$data['sifat'] = $this->db->get("sifat")->result_array();
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
 		// $data['hak_akses'] = $this->db->query("SELECT * from jabatan")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
@@ -173,9 +177,10 @@ class Surat_Masuk extends CI_Controller {
 				'tanggal_surat' => date('Y-m-d', strtotime($this->input->post('tanggal_surat'))), 
 				'pengirim' => $this->input->post('pengirim'), 
 				'id_jenis' => $this->input->post('id_jenis'), 
+				'id_sifat' => $this->input->post('id_sifat'), 
 				'id_berkas' => $this->input->post('id_berkas'), 
 				'id_media_pengirim' => $this->input->post('id_media_pengirim'), 
-				'tanggal_mulai_retensi' => date('Y-m-d', strtotime($this->input->post('tanggal_mulai_retensi'))), 
+				// 'tanggal_mulai_retensi' => date('Y-m-d', strtotime($this->input->post('tanggal_mulai_retensi'))), 
 				'file' => $this->input->post('no_surat').".$typefile", 
 				'created_by' => $_SESSION['userid'],  
 			];
@@ -205,6 +210,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['title'] = "Ubah $this->cap";
 		$data['content'] = "$this->content/_form";
 		$data['type'] = 'Ubah';
+		$data['sifat'] = $this->db->get("sifat")->result_array();
 		$data['parent'] = $this->db->query("SELECT * FROM $this->low")->result_array();
 		$data['data'] = $this->db->get_where("$this->low", ['id' => $id])->row_array();		
 		$this->load->view('backend/index',$data);

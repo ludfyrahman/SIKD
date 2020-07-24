@@ -21,7 +21,7 @@
             <div class="inner">
               <h3><?= $surat_masuk ?></h3>
 
-              <p>Surat Masuk</p>
+              <p>Arsip</p>
             </div>
             <div class="icon">
               <i class="ion ion-android-mail"></i>
@@ -34,14 +34,14 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-            <h3><?= $surat_keluar ?></h3>
+            <h3><?= $jenis ?></h3>
 
-              <p>Surat Keluar</p>
+              <p>Jenis Arsip</p>
             </div>
             <div class="icon">
               <i class="ion ion-email"></i>
             </div>
-            <a href="<?= base_url('admin/surat_keluar') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/jenis') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->

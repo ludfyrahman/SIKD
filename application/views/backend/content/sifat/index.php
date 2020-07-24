@@ -27,6 +27,7 @@
                   <th>No</th>
                   <th>Nama</th>
                   <th>Deskripsi</th>
+                  <th>Status</th>
                   <th>Aksi</th>
                 </tr>
             ";
@@ -39,12 +40,14 @@
                 <tbody>
                   <?php 
                   $no = 1;
+                  $status = ['private', 'umum'];
                   foreach ($data as $d) {
                     ?>
                   <tr>
                     <td><?= $no ?></td>
                     <td><?= $d['nama'] ?></td>
                     <td><?= $d['deskripsi'] ?></td>
+                    <td><?= $status[$d['status']] ?></td>
                     <td>
                     <a href="<?= base_url("admin/$this->low/delete/".$d['id']) ?>" class="btn btn-default btn-xs delete" data-toggle="tooltip" data-placement="top" data-original-title="Hapus Data"><i class="fa fa-trash"></i></a>
                         <a href="<?= base_url("admin/$this->low/edit/".$d['id']) ?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Ubah Data"><i class="fa fa-pencil"></i></a>

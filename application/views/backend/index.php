@@ -267,7 +267,9 @@
 
 <!-- jQuery 3 -->
 <script>var BASEURL = '<?= base_url() ?>';
-  var datachart = <?php echo json_encode($line)?>
+
+  var datachart = <?php if($this->uri->segment("2") == 'dashboard') {echo json_encode($line);}else{ echo "null";}?>;
+
 </script>
 <script src="<?= base_url() ?>assets/vendor/jquery/dist/jquery.min.js"></script>
 <script src="<?= base_url() ?>assets/js/jquery.redirect.js"></script>

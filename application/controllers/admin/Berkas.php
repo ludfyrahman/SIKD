@@ -40,6 +40,7 @@ class Berkas extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
+				'keterangan' => $this->input->post('keterangan'), 
 				'status' => $this->input->post('status'), 
 				'created_by' => $_SESSION['userid'],  
 			];
@@ -68,6 +69,7 @@ class Berkas extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
+				'keterangan' => $this->input->post('keterangan'), 
 				'status' => $this->input->post('status'), 
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],

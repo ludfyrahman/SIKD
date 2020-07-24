@@ -13,6 +13,7 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
         if($_SESSION['userlevel'] != 1 ){
             $akses_id =" AND smt.id_pengguna=$_SESSION[userid]";
         }
+        $data['jenis'] = $this->db->get("jenis")->num_rows();
         $data['notifikasi_surat_masuk'] = $this->db->query("SELECT sm.id,sm.no_surat, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();

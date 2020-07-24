@@ -26,15 +26,26 @@
         <div class="box-body">
           <form action="" method="post">
             <div class="row">
-              <div class="form-group col-md-12">
+              <div class="form-group col-md-6">
                   <label>Nama</label>
                   <input type="text" value='<?= Input_Helper::postOrOr('nama', $data['nama']) ?>' name="nama" class="form-control" placeholder="Masukkan nama anda" required>
               </div>
-             
+              <div class="form-group col-md-6">
+                  <label>Status</label>
+                  <select class="form-control select2" name="status" style="width: 100%;">
+                  <?php
+                  $status = Input_Helper::postOrOr('status', $data['status']);
+                  ?>
+                    <option <?= ($status == 1 ? "selected" : "")?> value="1">Umum</option>
+                    <option <?= ($status == 0 ? "selected" : "")?> value="0">Private</option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
+                  </select>
+              </div>
               <div class="form-group col-md-12">
                   <label>Deskripsi</label>
                   <textarea name="deskripsi" class="form-control" id="" cols="30" rows="10"><?= Input_Helper::postOrOr('deskripsi', $data['deskripsi']) ?></textarea>
               </div>
+              
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
               </div>

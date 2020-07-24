@@ -26,6 +26,7 @@
             <tr>
                   <th>No</th>
                   <th>Nama</th>
+                  <th>Keterangan</th>
                   <th>Status</th>
                   <th>Aksi</th>
                 </tr>
@@ -44,6 +45,7 @@
                   <tr>
                     <td><?= $no ?></td>
                     <td><?= $d['nama'] ?></td>
+                    <td><?= $d['keterangan'] ?></td>
                     <td><?= STATUS_PENGGUNA[$d['status']] ?></td>
                     <td>
                         <a href="<?= base_url("admin/$this->low/delete/".$d['id']) ?>" class="btn btn-default btn-xs delete" data-toggle="tooltip" data-placement="top" data-original-title="Hapus Data"><i class="fa fa-trash"></i></a>

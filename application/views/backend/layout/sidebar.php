@@ -33,7 +33,7 @@
         <?php
         if($_SESSION['userlevel'] == 1){
         ?>
-        <li class="treeview <?= ($this->uri->segment(2) == 'karyawan' || $this->uri->segment(2) == 'bagian' || $this->uri->segment(2) == 'jabatan' || $this->uri->segment(2) == 'golongan' || $this->uri->segment(2) == 'pendidikan' ? 'active' : '') ?>">
+        <!-- <li class="treeview <?= ($this->uri->segment(2) == 'karyawan' || $this->uri->segment(2) == 'bagian' || $this->uri->segment(2) == 'jabatan' || $this->uri->segment(2) == 'golongan' || $this->uri->segment(2) == 'pendidikan' ? 'active' : '') ?>">
           <a href="#">
             <i class="fa fa-user"></i>
             <span>Karyawan</span>
@@ -42,23 +42,20 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <!-- <li class="<?= ($this->uri->segment(3) == 'karyawan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/karyawan') ?>"><i class="fa fa-circle-o"></i>Data Karyawan</a></li> -->
             <li class="<?= ($this->uri->segment(3) == 'bagian' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/bagian') ?>"><i class="fa fa-circle-o"></i> Bagian</a></li>
             <li class="<?= ($this->uri->segment(3) == 'jabatan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/jabatan') ?>"><i class="fa fa-circle-o"></i> Jabatan</a></li>
             <li class="<?= ($this->uri->segment(3) == 'golongan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/golongan') ?>"><i class="fa fa-circle-o"></i> Golongan / Kabinet</a></li>
-            <!-- <li class="<?= ($this->uri->segment(3) == 'pendidikan' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/pendidikan') ?>"><i class="fa fa-circle-o"></i> Pendidikan</a></li> -->
-            <!-- <li class="<?= ($this->uri->segment(3) == 'hak_akses' ? 'active' : '')?>"><a href="<?= base_url('admin/karyawan/hak_akses') ?>"><i class="fa fa-circle-o"></i> Hak Akses</a></li> -->
           </ul>
-        </li>
+        </li> -->
         <li class="<?= ($this->uri->segment(2) == "pengguna" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengguna') ?>">
-            <i class="fa fa-users"></i> <span>Pengguna</span>
+            <i class="fa fa-users"></i> <span>Pengelola Arsip</span>
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "pengirim" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/pengirim') ?>">
             <i class="fa fa-truck"></i>
-            <span>Pengirim</span>
+            <span>Unit Pencipta</span>
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "sifat" ? 'active' : '') ?>">
@@ -76,15 +73,15 @@
         <li class="<?= ($this->uri->segment(2) == "berkas" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/berkas') ?>">
             <i class="fa fa-th-list"></i>
-            <span>Berkas</span>
+            <span>Jumlah Arsip</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "retensi" ? 'active' : '') ?>">
+        <!-- <li  class="<?= ($this->uri->segment(2) == "retensi" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/retensi') ?>">
             <i class="fa fa-bookmark"></i>
             <span>Retensi</span>
           </a>
-        </li>
+        </li> -->
         <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/klasifikasi') ?>">
             <i class="fa fa-pie-chart"></i>

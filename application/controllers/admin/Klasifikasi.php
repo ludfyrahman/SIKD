@@ -20,7 +20,7 @@ class Klasifikasi extends CI_Controller {
     public function index(){
 		$data['title'] = "Data $this->cap";
 		$data['content'] = "$this->low/index";
-		$data['data'] = $this->db->query("SELECT k.*, r.jenis as retensi FROM $this->low k JOIN retensi r ON k.id_retensi=r.id")->result_array();
+		$data['data'] = $this->db->get("$this->low")->result_array();
         $this->load->view('backend/index',$data);
     }
 	
@@ -43,8 +43,8 @@ class Klasifikasi extends CI_Controller {
 			[
 				'id' => $this->input->post('id'), 
 				'nama' => $this->input->post('nama'), 
+				'keterangan' => $this->input->post('keterangan'), 
 				'id_parent' => $this->input->post('id_parent'), 
-				'id_retensi' => $this->input->post('id_retensi'), 
 				'created_by' => $_SESSION['userid'],  
 			];
 			$this->db->insert("$this->low",$arr);
@@ -75,8 +75,8 @@ class Klasifikasi extends CI_Controller {
 			[
 				'id' => $this->input->post('id'), 
 				'nama' => $this->input->post('nama'), 
+				'keterangan' => $this->input->post('keterangan'), 
 				'id_parent' => $this->input->post('id_parent'), 
-				'id_retensi' => $this->input->post('id_retensi'), 
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],
 			];

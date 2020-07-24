@@ -40,6 +40,7 @@ class Sifat extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
+				'status' => $this->input->post('status'), 
 				'deskripsi' => $this->input->post('deskripsi'), 
 				'created_by' => $_SESSION['userid'],  
 			];
@@ -68,6 +69,7 @@ class Sifat extends CI_Controller {
 			$arr =
 			[
 				'nama' => $this->input->post('nama'), 
+				'status' => $this->input->post('status'), 
 				'deskripsi' => $this->input->post('deskripsi'),
 				'updated_at' => date('Y-m-d H:i:s'),
 				'updated_by' => $_SESSION['userid'],

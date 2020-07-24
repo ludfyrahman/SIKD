@@ -41,6 +41,10 @@
                     <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
                   </select>
               </div>
+              <div class="form-group col-md-12">
+                  <label>Keterangan</label>
+                  <textarea name="keterangan" class="form-control" cols="30" rows="10"><?= Input_Helper::postOrOr('keterangan', $data['keterangan']) ?></textarea>
+              </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
               </div>

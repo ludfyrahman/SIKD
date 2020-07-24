@@ -27,7 +27,7 @@
                   <th>No</th>
                   <th>Kode</th>
                   <th>Nama</th>
-                  <th>Retensi</th>
+                  <th>Keterangan</th>
                   <th>Aksi</th>
                 </tr>
             ";
@@ -46,7 +46,7 @@
                     <td><?= $no ?></td>
                     <td><?= $d['id'] ?></td>
                     <td><?= $d['nama'] ?></td>
-                    <td><?= $d['retensi'] ?></td>
+                    <td><?= $d['keterangan'] ?></td>
                     <td>
                     <a href="<?= base_url("admin/$this->low/delete/".$d['id']) ?>" class="btn btn-default btn-xs delete" data-toggle="tooltip" data-placement="top" data-original-title="Hapus Data"><i class="fa fa-trash"></i></a>
                         <a href="<?= base_url("admin/$this->low/edit/".$d['id']) ?>" class="btn btn-default btn-xs" data-toggle="tooltip" data-placement="top" data-original-title="Ubah Data"><i class="fa fa-pencil"></i></a>

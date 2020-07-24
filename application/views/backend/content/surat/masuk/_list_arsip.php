@@ -1,4 +1,4 @@
-<table id="example2" class="table table-hover table-striped">
+<table id="example1" class="table table-hover table-striped">
     <thead>
         <tr>
             <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>

@@ -26,15 +26,15 @@
         <div class="box-body">
           <form action="" method="post">
             <div class="row">
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                   <label>Kode</label>
                   <input type="text" value='<?= Input_Helper::postOrOr('id', $data['id']) ?>' name="id" class="form-control" placeholder="Masukkan kode" required>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                   <label>Nama</label>
                   <input type="text" value='<?= Input_Helper::postOrOr('nama', $data['nama']) ?>' name="nama" class="form-control" placeholder="Masukkan nama" required>
               </div>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-4">
                   <label>Parent</label>
                   <select class="form-control select2" name="id_parent" style="width: 100%;">
                   <option value=""></option>
@@ -46,16 +46,9 @@
                   <?php } ?>
                   </select>
               </div>
-              <div class="form-group col-md-6">
-                  <label>Retensi</label>
-                  <select class="form-control select2" name="id_retensi" style="width: 100%;">
-                  <?php
-                  $ret = Input_Helper::postOrOr('id_retensi', $data['id_retensi']);
-                  foreach ($retensi as $r) {
-                  ?>
-                    <option <?= ($ret == $r['id'] ? "selected" : "")?> value="<?= $r['id'] ?>"><?= $r['jenis'] ?></option>
-                  <?php } ?>
-                  </select>
+              <div class="form-group col-md-12">
+                  <label>Keterangan</label>
+                  <textarea name="keterangan" class="form-control" cols="30" rows="10"><?= Input_Helper::postOrOr('keterangan', $data['keterangan']) ?></textarea>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
