@@ -105,8 +105,8 @@
                   </select>
               </div>
               <div class="form-group col-md-6">
-                  <label>Box</label>
-                  <input type="text"  value='<?= Input_Helper::postOrOr('box', $data['box']) ?>' name="box" class="form-control" placeholder="Masukkan Box" required>
+                  <label>Boks</label>
+                  <input type="text"  value='<?= Input_Helper::postOrOr('box', $data['box']) ?>' name="box" class="form-control" placeholder="Masukkan Boks" required>
               </div>
               <div class="form-group col-md-6" style="display:none">
                   <label>Tanggal Mulai Retensi</label>

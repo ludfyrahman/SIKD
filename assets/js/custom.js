@@ -5,6 +5,39 @@ $(function(){
     $('.warning').click(function(){
         return confirm("Apakah anda yakin ?");
     });
+    if($("#arsip").val() !=''){
+        var val = $("#arsip").val();
+        // console.log(val);
+        loadDataArsip(val);
+    }
+    function loadDataArsip(val){
+        $.ajax({
+            type: "GET",
+            url: BASEURL+"api/arsip/"+val,
+            cache: false,
+            success: function(data){
+                var obj = JSON.parse(data);
+                // console.log(data)
+                $("#jenis").val(obj.jenis);
+                $("#pengirim").val(obj.pengirim);
+                // var appendElement = "<option value=' '>Pilih Provinsi</option>";
+                // for (let index = 0; index < obj.length; index++) {
+                //     appendElement += "<option "+ (provinsi_id == obj[index]['id'] ? "selected" : "") +" value="+obj[index]['id']+">"+
+                //                 obj[index]['name']+
+                //             "</option>";                
+                // }
+                // $("#provinsi").html(appendElement);
+            },
+            error(res){
+                console.log("errrror")
+                console.log("res");
+            }
+        });
+    }
+    $("#arsip").change(function(){
+        var val = $(this).val();
+        loadDataArsip(val);
+    })
     $(".klasifikasi").change(function(){
         $.ajax({
             type: "GET",

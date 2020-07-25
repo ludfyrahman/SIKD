@@ -94,14 +94,14 @@
             <span>Klasifikasi</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
-          <a href="<?= base_url('admin/klasifikasi') ?>">
+        <li  class="<?= ($this->uri->segment(2) == "akusisi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/akusisi') ?>">
             <i class="fa fa-pie-chart"></i>
             <span>Akusisi</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
-          <a href="<?= base_url('admin/klasifikasi') ?>">
+        <li  class="<?= ($this->uri->segment(2) == "pemusnahan" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/pemusnahan') ?>">
             <i class="fa fa-pie-chart"></i>
             <span>Pemusnahan Arsip</span>
           </a>

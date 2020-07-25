@@ -53,7 +53,8 @@
             </div>
             <!-- /.box-body -->
             <div class="box-footer">
-
+            <?php
+            if($data['status_publik']){?>
               <ul class="mailbox-attachments clearfix">
                 <!-- </li> -->
                 <li>
@@ -79,6 +80,7 @@
                   </div>
                 </li>
               </ul>
+            <?php }?>
             </div>
             <!-- /.box-footer -->
             <div class="box-footer">

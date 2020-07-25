@@ -109,8 +109,9 @@ class Surat_Masuk extends CI_Controller {
 			$user = " AND smt.id_pengguna=$_SESSION[userid]";
 			$where = " smt.id_surat='$id'";
 		}
-		$data['data'] = $this->db->query("SELECT sm.id, sm.image, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
+		$data['data'] = $this->db->query("SELECT sm.id, sf.status status_publik, sm.image, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
 		JOIN jenis j ON sm.id_jenis=j.id JOIN pengirim p ON sm.id_media_pengirim=p.id
+		JOIN sifat sf ON sm.id_sifat=sf.id 
 		$tembusan
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE $where $user")->row_array();		
 		$data['pengguna'] = $this->db->get_where("pengguna")->result_array();

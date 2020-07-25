@@ -438,6 +438,11 @@ $("#search_tidak_ditindak").on("keyup", function() {
     $('[id="datepicker"]').datepicker({
       autoclose: true
     })
+    $('[id="datepicker_tahun"]').datepicker({
+      format: "yyyy",
+      viewMode: "years", 
+      minViewMode: "years"
+    })
 
     //iCheck for checkbox and radio inputs
     $('input[type="checkbox"].minimal, input[type="radio"].minimal').iCheck({
