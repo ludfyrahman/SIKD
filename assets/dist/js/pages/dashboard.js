@@ -121,9 +121,9 @@ $(".box-header .dropdown-toggle").hide();
     resize    : true,
     data      : datachart,
     xkey      : 'y',
-    ykeys     : ['item1', 'item2'],
-    labels    : ['Surat Masuk', 'Surat Keluar'],
-    lineColors: ['#a0d0e0', '#3c8dbc'],
+    ykeys     : ['item1'],
+    labels    : ['Surat Masuk'],
+    lineColors: ['#a0d0e0'],
     hideHover : 'auto'
   });
 

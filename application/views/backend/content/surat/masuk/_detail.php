@@ -55,15 +55,26 @@
             <div class="box-footer">
 
               <ul class="mailbox-attachments clearfix">
-                </li>
+                <!-- </li> -->
                 <li>
                   <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
 
                   <div class="mailbox-attachment-info">
                     <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?= $data['file'] ?></a>
                         <span class="mailbox-attachment-size">
-                          1,245 KB
+                          <!-- 1,245 KB -->
                           <a target="_blank" href="<?= base_url('assets/upload/surat/masuk/'.$data['file']) ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                        </span>
+                  </div>
+                </li>
+                <li>
+                  <span class="mailbox-attachment-icon"><i class="fa fa-file-image-o"></i></span>
+
+                  <div class="mailbox-attachment-info">
+                    <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> <?= $data['image'] ?></a>
+                        <span class="mailbox-attachment-size">
+                          <!-- 1,245 KB -->
+                          <a target="_blank" href="<?= base_url('assets/upload/surat/masuk/'.$data['image']) ?>" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
                         </span>
                   </div>
                 </li>

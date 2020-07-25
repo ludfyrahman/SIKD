@@ -29,9 +29,9 @@ class Surat_Masuk extends CI_Controller {
 			$akses_id .=" AND smt.id_pengguna=$_SESSION[userid]";
 		}
 		$search = "";
-		if($_SESSION['userlevel'] != 1){
-			$search.=" AND s.status=1 ";
-		}
+		// if($_SESSION['userlevel'] != 1){
+		// 	$search.=" AND s.status=1 ";
+		// }
 		if(isset($_POST['search'])){
 			$val = $_POST['search'];
 			$search .=" AND sm.pengirim like '%$val%' OR k.nama like '%$val%' ";
@@ -109,7 +109,7 @@ class Surat_Masuk extends CI_Controller {
 			$user = " AND smt.id_pengguna=$_SESSION[userid]";
 			$where = " smt.id_surat='$id'";
 		}
-		$data['data'] = $this->db->query("SELECT sm.id, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
+		$data['data'] = $this->db->query("SELECT sm.id, sm.image, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 
 		JOIN jenis j ON sm.id_jenis=j.id JOIN pengirim p ON sm.id_media_pengirim=p.id
 		$tembusan
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id WHERE $where $user")->row_array();		
@@ -156,6 +156,7 @@ class Surat_Masuk extends CI_Controller {
 		$data['jenis'] = $this->db->get("jenis")->result_array();
 		$data['sifat'] = $this->db->get("sifat")->result_array();
 		$data['pengiriman'] = $this->db->get("pengirim")->result_array();
+		$data['penyimpanan'] = $this->db->get("penyimpanan")->result_array();
 		// $data['hak_akses'] = $this->db->query("SELECT * from jabatan")->result_array();
 		$data['retensi'] = $this->db->query("SELECT * FROM retensi")->result_array();
 		$data['berkas'] = $this->db->get_where("berkas", ['status' => 1])->result_array();
@@ -170,6 +171,9 @@ class Surat_Masuk extends CI_Controller {
 		try{
 			
 			$typefile = Response_Helper::getformatfile($f['file']['name']);
+			$typegambar = Response_Helper::getformatfile($f['gambar']['name']);
+			$namafile = $this->input->post('no_surat')."_file".".$typefile";
+			$namagambar =  $this->input->post('no_surat')."_gambar".".$typegambar";
 			$arr =
 			[
 				'id_klasifikasi' => $this->input->post('id_klasifikasi'), 
@@ -179,21 +183,31 @@ class Surat_Masuk extends CI_Controller {
 				'id_jenis' => $this->input->post('id_jenis'), 
 				'id_sifat' => $this->input->post('id_sifat'), 
 				'id_berkas' => $this->input->post('id_berkas'), 
+				'id_penyimpanan' => $this->input->post('id_penyimpanan'), 
+				'box' => $this->input->post('box'), 
 				'id_media_pengirim' => $this->input->post('id_media_pengirim'), 
-				// 'tanggal_mulai_retensi' => date('Y-m-d', strtotime($this->input->post('tanggal_mulai_retensi'))), 
-				'file' => $this->input->post('no_surat').".$typefile", 
+				'file' => $namafile, 
+				'image' => $namagambar, 
 				'created_by' => $_SESSION['userid'],  
 			];
-			if(Input_Helper::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg', 'application/pdf'], $f['file'])){
-				Input_Helper::uploadImage($f['file'], 'surat/masuk', $this->input->post('no_surat').".$typefile");
-				$akses = explode(',', $d['akses']);
-				$this->db->insert("$this->low", $arr);
-				$id  = $this->db->insert_id();
-				// for ($i=0; $i < count($akses) ; $i++) {
-					// $this->db->insert("surat_masuk_tembusan", ['id_surat' => $id, 'id_pengguna'=> $_SESSION['userid']]);
-				// }
-				$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
-				redirect(base_url("admin/$this->low/"));
+			if(Input_Helper::validateTypeUpload(['image/png', 'image/jpg', 'image/jpeg'], $f['gambar'])){
+				if(Input_Helper::validateSizeUpload("5000000", $f['gambar'])){
+						if(Input_Helper::validateSizeUpload("2000000", $f['file'])){
+							Input_Helper::uploadImage($f['gambar'], 'surat/masuk', $namagambar);
+							Input_Helper::uploadImage($f['file'], 'surat/masuk', $namafile);
+							// $akses = explode(',', $d['akses']);
+							$this->db->insert("$this->low", $arr);
+							$id  = $this->db->insert_id();
+							$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
+							redirect(base_url("admin/$this->low/"));
+						}else{
+							$this->session->set_flashdata("message", ['danger', "File yang anda upload melebihi ukuran 2 mb.", ' Gagal']);
+							$this->add();
+						}
+				}else{
+					$this->session->set_flashdata("message", ['danger', "Gambar yang anda upload melebihi ukuran 5 mb.", ' Gagal']);
+					$this->add();
+				}
 			}else{
 				$this->session->set_flashdata("message", ['danger', "file yang anda upload tidak sesuai.", ' Gagal']);
 				$this->add();

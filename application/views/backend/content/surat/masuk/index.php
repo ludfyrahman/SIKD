@@ -30,7 +30,11 @@
                     <h3 class="box-title">Arsip</h3>
 
                     <div class="box-tools pull-right">
+                    <?php 
+                    if($_SESSION['userlevel'] == 1){
+                    ?>
                     <a href="<?= base_url("admin/".$ci->uri->segment(2)."/add")?>" class="btn btn-primary btn-block margin-bottom">Tambah Arsip</a>
+                    <?php } ?>
                       <!-- <div class="has-feedback">
                       <input type="text" class="form-control input-sm" id="search_arsip" placeholder="Search Mail">
                         <span class="glyphicon glyphicon-search form-control-feedback"></span>

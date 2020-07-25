@@ -58,6 +58,12 @@
             <span>Unit Pencipta</span>
           </a>
         </li>
+        <li  class="<?= ($this->uri->segment(2) == "penyimpanan" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/penyimpanan') ?>">
+            <i class="fa fa-truck"></i>
+            <span>Lokasi Penyimpanan</span>
+          </a>
+        </li>
         <li  class="<?= ($this->uri->segment(2) == "sifat" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/sifat') ?>">
             <i class="fa fa-pie-chart"></i>
@@ -88,6 +94,19 @@
             <span>Klasifikasi</span>
           </a>
         </li>
+        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/klasifikasi') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Akusisi</span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/klasifikasi') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Pemusnahan Arsip</span>
+          </a>
+        </li>
+        
         <!-- <li  class="<?= ($this->uri->segment(2) == "hak_akses" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/hak_akses') ?>">
             <i class="fa fa-pie-chart"></i>
@@ -104,18 +123,24 @@
             </span>
           </a>
         </li>
+        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/klasifikasi') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Kritik Dan Saran</span>
+          </a>
+        </li>
+        <?php if($_SESSION['userlevel'] == 1){?>
         <li class=" <?= ($this->uri->segment(2) == "site"  ? 'active' : '') ?>">
           <a href="<?= base_url('site/backup') ?>">
             <i class="fa fa-file-archive-o"></i>
             <span>Database</span>
-            
           </a>
         </li>
+        
         <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
         <li class="header">MENU</li>
         <li><a href="<?= base_url('admin/log') ?>"><i class="fa fa-circle-o text-red"></i> <span>Aktifitas</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
-        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
+        <?php }?>
       </ul>
     </section>
     <!-- /.sidebar -->

@@ -35,7 +35,7 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
             $push =[
                 'y' => date('Y-m-d', strtotime($s['created_at'])),
                 'item1' => $s['jumlah'],
-                'item2' => $i,
+                // 'item2' => $i,
             ];
             array_push($data['line'], $push);
             $i++;

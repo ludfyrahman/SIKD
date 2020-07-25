@@ -28,7 +28,7 @@
             <div class="row">
               <div class="form-group col-md-6">
                   <label>No Arsip</label>
-                  <input type="text" value='<?= Input_Helper::postOrOr('no_surat', $data['no_surat']) ?>' name="no_surat" class="form-control" placeholder="Masukkan Nomor Surat" required>
+                  <input type="text" maxlength="30" value='<?= Input_Helper::postOrOr('no_surat', $data['no_surat']) ?>' name="no_surat" class="form-control" placeholder="Masukkan Nomor Surat" required>
               </div>
               <div class="form-group col-md-6">
                   <label>Tanggal Pencipta</label>
@@ -94,8 +94,23 @@
                   </select>
               </div>
               <div class="form-group col-md-6">
+                  <label>Lokasi Penyimpanan</label>
+                  <select class="form-control select2" name="id_penyimpanan" style="width: 100%;">
+                  <?php
+                  $pen = Input_Helper::postOrOr('id_penyimpanan', $data['id_penyimpanan']);
+                  foreach ($penyimpanan as $py) {
+                  ?>
+                    <option <?= ($pen == $py['id'] ? "selected" : "")?> value="<?= $py['id'] ?>"><?= $py['nama'] ?></option>
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Box</label>
+                  <input type="text"  value='<?= Input_Helper::postOrOr('box', $data['box']) ?>' name="box" class="form-control" placeholder="Masukkan Box" required>
+              </div>
+              <div class="form-group col-md-6" style="display:none">
                   <label>Tanggal Mulai Retensi</label>
-                  <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_mulai_retensi', $data['tanggal_mulai_retensi']) ?>' name="tanggal_mulai_retensi" class="form-control" placeholder="Masukkan Tanggal Mulai Retensi" required>
+                  <input type="text" id="datepicker" value='<?= Input_Helper::postOrOr('tanggal_mulai_retensi', $data['tanggal_mulai_retensi']) ?>' name="tanggal_mulai_retensi" class="form-control" placeholder="Masukkan Tanggal Mulai Retensi">
               </div>
               <div class="form-group col-md-6" style="display:none">
                   <label>Retensi</label>
@@ -116,6 +131,10 @@
               <div class="form-group col-md-6">
                   <label>File</label>
                   <input type="file" name="file" class="form-control" required>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Gambar</label>
+                  <input type="file" name="gambar" class="form-control" required>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary" ><?= $type ?></button>
