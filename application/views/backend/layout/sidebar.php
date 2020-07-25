@@ -107,6 +107,7 @@
           </a>
         </li>
         
+        
         <!-- <li  class="<?= ($this->uri->segment(2) == "hak_akses" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/hak_akses') ?>">
             <i class="fa fa-pie-chart"></i>
@@ -121,6 +122,12 @@
             <span class="pull-right-container">
               <span class="label label-warning pull-right">3</span>
             </span>
+          </a>
+        </li>
+        <li  class="<?= ($this->uri->segment(2) == "peminjaman" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/peminjaman') ?>">
+            <i class="fa fa-pie-chart"></i>
+            <span>Peminjaman Arsip</span>
           </a>
         </li>
         <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
