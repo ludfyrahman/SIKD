@@ -97,7 +97,7 @@
                 <?php
               }
               ?>
-              <a data-toggle="modal" data-target="#tindak" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a>
+              <!-- <a data-toggle="modal" data-target="#tindak" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-forward"></i> Tindak Lanjuti</button></a> -->
             </div>
             <!-- /.box-footer -->
           </div>

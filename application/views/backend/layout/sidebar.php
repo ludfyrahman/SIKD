@@ -124,6 +124,12 @@
             </span>
           </a>
         </li>
+        <li class=" <?= ($this->uri->segment(2) == "saran" ? 'active' : '') ?>">
+          <a href="<?= base_url('admin/saran') ?>">
+            <i class="fa fa-comments-o"></i>
+            <span>Kritik & saran</span>
+          </a>
+        </li>
         <li  class="<?= ($this->uri->segment(2) == "peminjaman" ? 'active' : '') ?>">
           <a href="<?= base_url('admin/peminjaman') ?>">
             <i class="fa fa-pie-chart"></i>
