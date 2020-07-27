@@ -136,12 +136,6 @@
             <span>Peminjaman Arsip</span>
           </a>
         </li>
-        <li  class="<?= ($this->uri->segment(2) == "klasifikasi" ? 'active' : '') ?>">
-          <a href="<?= base_url('admin/klasifikasi') ?>">
-            <i class="fa fa-pie-chart"></i>
-            <span>Kritik Dan Saran</span>
-          </a>
-        </li>
         <?php if($_SESSION['userlevel'] == 1){?>
         <li class=" <?= ($this->uri->segment(2) == "site"  ? 'active' : '') ?>">
           <a href="<?= base_url('site/backup') ?>">
