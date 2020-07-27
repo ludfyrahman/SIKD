@@ -20,7 +20,11 @@ class Saran extends CI_Controller {
     public function index(){
 		$data['title'] = "Data $this->low";
 		$data['content'] = "$this->low/index";
-		$data['data'] = $this->db->query("SELECT s.*, p.nama, p.email FROM $this->low s JOIN pengguna p ON s.id_pengguna=p.id")->result_array();
+		$where = "";
+		if($_SESSION['userlevel'] != 1){
+			$where.=" WHERE s.id_pengguna='$_SESSION[userid]'";
+		}
+		$data['data'] = $this->db->query("SELECT s.*, p.nama, p.email FROM $this->low s JOIN pengguna p ON s.id_pengguna=p.id $where")->result_array();
         $this->load->view('backend/index',$data);
     }
 	
