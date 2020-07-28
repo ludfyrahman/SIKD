@@ -50,24 +50,17 @@ class Surat_Masuk extends CI_Controller {
 		LEFT JOIN jenis  j ON sm.id_jenis=j.id
 		LEFT JOIN pengirim p ON sm.id_media_pengirim =p.id
 		LEFT JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
-		 where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
-		//  echo "<pre>";
-		//  print_r($data);
-		// $data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
-		// $data['sekarang'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=3 GROUP BY smt.id_surat")->result_array();
-		// $data['nanti'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=4 GROUP BY smt.id_surat")->result_array();
-		// $data['tidak_ditindak'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=5 GROUP BY smt.id_surat")->result_array();
-		// echo "<pre>";
-		// print_r($data);
-		// echo "</pre>";
+		 where sm.status='$value'  $tanggal  $search")->result_array();
+		
+		// $data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi, b.nama as berkas, pen.nama as penyimpanan,  j.nama as jenis, p.nama as unit_pencipta FROM $this->low sm 
+		// LEFT JOIN klasifikasi k ON sm.id_klasifikasi=k.id 
+		// LEFT JOIN sifat s ON sm.id_sifat=s.id 
+		// LEFT JOIN berkas b ON sm.id_berkas=b.id
+		// LEFT JOIN jenis  j ON sm.id_jenis=j.id
+		// LEFT JOIN pengirim p ON sm.id_media_pengirim =p.id
+		// LEFT JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
+		//  where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
+		
 		$this->load->view('backend/index',$data);
 	}
 	public function pencarian($val = null){
@@ -118,7 +111,7 @@ class Surat_Masuk extends CI_Controller {
 		if($cek['created_by'] != $_SESSION['userid']){
 			$tembusan =" LEFT JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
 			$tembusan_data = ", smt.id_pengguna, smt.status, smt.id as id_smt ";
-			$user = " AND smt.id_pengguna=$_SESSION[userid]";
+			// $user = " AND smt.id_pengguna=$_SESSION[userid]";
 			$where = " smt.id_surat='$id'";
 		}
 		$data['data'] = $this->db->query("SELECT sm.id, sf.status status_publik, sm.image, sm.tanggal_mulai_retensi,sm.no_surat, sm.tanggal_surat, sm.pengirim, sm.file, sm.created_at, j.nama as jenis, p.nama as media, k.nama as klasifikasi, sm.created_by $tembusan_data FROM $this->low sm 

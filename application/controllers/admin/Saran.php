@@ -50,7 +50,7 @@ class Saran extends CI_Controller {
 				// 'created_at' => date,  
 			];
 			$this->db->insert("$this->low",$arr);
-			Log_Helper::Insert(['type' => 1, 'deskripsi' => Auth_Helper::Get("nama")." Menambahkan Saran Di $this->cap", 'created_by' => $_SESSION['userid']]);
+			Log_Helper::Insert(['type' => 1, 'deskripsi' => Auth_Helper::Get("nama")." Menambahkan Data Di $this->cap", 'created_by' => $_SESSION['userid']]);
 			$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 			redirect(base_url("admin/$this->low/"));
 			

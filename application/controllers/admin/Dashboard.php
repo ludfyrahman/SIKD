@@ -10,8 +10,10 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
         $data['surat_masuk'] = $this->db->get_where("surat_masuk", ['status' => 1])->num_rows();
         $akses ="JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat";
         $akses_id = "";
+        $log_where = "";
         if($_SESSION['userlevel'] != 1 ){
             $akses_id =" AND smt.id_pengguna=$_SESSION[userid]";
+            $log_where = " WHERE created_by='$_SESSION[userid]'";
         }
         $data['jenis'] = $this->db->get("jenis")->num_rows();
         $data['notifikasi_surat_masuk'] = $this->db->query("SELECT sm.id,sm.no_surat, sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
@@ -19,8 +21,8 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
         $data['surat_keluar'] = $this->db->get_where("surat_keluar", ['status' => 1])->num_rows();
         $data['sifat'] = $this->db->get("sifat")->num_rows();
-        $data['log'] = $this->db->query("SELECT * FROM log order by created_at desc LIMIT 10")->result_array();
-        $data['day'] = $this->db->query("SELECT * FROM log GROUP BY DAY(created_at) LIMIT 5")->result_array();
+        $data['log'] = $this->db->query("SELECT * FROM log $log_where order by created_at desc LIMIT 10")->result_array();
+        $data['day'] = $this->db->query("SELECT * FROM log $log_where GROUP BY DAY(created_at) LIMIT 5")->result_array();
         
         $surat = $this->db->query("SELECT COUNT(*) jumlah, created_at FROM surat_masuk GROUP BY DATE(created_at)")->result_array();
         // echo "<pre>";

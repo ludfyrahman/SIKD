@@ -95,7 +95,7 @@
               <?php
               if(isset($data['status'])){
                 ?>
-                <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a>
+                <!-- <a href="<?= base_url('admin/'.$this->low."/aksi/".$data['status']."/berkas/".$data['id_smt']) ?>" class="warning"><button type="button" class="btn btn-default"><i class="fa fa-book"></i> Berkaskan</button></a> -->
                 <?php
               }
               ?>
