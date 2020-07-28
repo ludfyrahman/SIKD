@@ -44,12 +44,12 @@ class Surat_Masuk extends CI_Controller {
 		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=1 GROUP BY smt.id_surat")->result_array();
 		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi, b.nama as berkas, pen.nama as penyimpanan,  j.nama as jenis, p.nama as unit_pencipta FROM $this->low sm 
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id 
-		JOIN sifat s ON sm.id_sifat=s.id 
-		JOIN berkas b ON sm.id_berkas=b.id
-		JOIN jenis  j ON sm.id_jenis=j.id
-		JOIN pengirim p ON sm.id_media_pengirim =p.id
-		JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
+		LEFT JOIN klasifikasi k ON sm.id_klasifikasi=k.id 
+		LEFT JOIN sifat s ON sm.id_sifat=s.id 
+		LEFT JOIN berkas b ON sm.id_berkas=b.id
+		LEFT JOIN jenis  j ON sm.id_jenis=j.id
+		LEFT JOIN pengirim p ON sm.id_media_pengirim =p.id
+		LEFT JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
 		 where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
 		//  echo "<pre>";
 		//  print_r($data);
@@ -145,53 +145,6 @@ class Surat_Masuk extends CI_Controller {
 	}
 	public function upload(){
 		include APPPATH.'third_party/PHPExcel.php';
-
-        // $config['upload_path'] = realpath('excel');
-        // $config['allowed_types'] = 'xlsx|xls|csv';
-        // $config['max_size'] = '10000';
-        // $config['encrypt_name'] = true;
-
-        // $this->load->library('upload', $config);
-
-        // if (!$this->upload->do_upload()) {
-
-        //     //upload gagal
-        //     $this->session->set_flashdata('notif', '<div class="alert alert-danger"><b>PROSES IMPORT GAGAL!</b> '.$this->upload->display_errors().'</div>');
-        //     //redirect halaman
-        //     // redirect('import/');
-
-        // } else {
-
-        //     $data_upload = $this->upload->data();
-
-        //     $excelreader     = new PHPExcel_Reader_Excel2007();
-        //     $loadexcel         = $excelreader->load('excel/'.$data_upload['file_name']); // Load file yang telah diupload ke folder excel
-        //     $sheet             = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
-
-        //     $data = array();
-
-        //     $numrow = 1;
-        //     foreach($sheet as $row){
-        //                     if($numrow > 1){
-        //                         array_push($data, array(
-        //                             'nama_dosen' => $row['A'],
-        //                             'email'      => $row['B'],
-        //                             'alamat'      => $row['C'],
-        //                         ));
-        //             }
-        //         $numrow++;
-		// 	}
-		// 	print_r($data);
-        //     // $this->db->insert_batch('tbl_dosen', $data);
-        //     //delete file from server
-        //     unlink(realpath('excel/'.$data_upload['file_name']));
-
-        //     //upload success
-        //     // $this->session->set_flashdata('notif', '<div class="alert alert-success"><b>PROSES IMPORT BERHASIL!</b> Data berhasil diimport!</div>');
-        //     // //redirect halaman
-        //     // redirect('import/');
-
-		// }
 		if(isset($_FILES["file"]["name"]))
 		{
 			$path = $_FILES["file"]["tmp_name"];
@@ -200,17 +153,45 @@ class Surat_Masuk extends CI_Controller {
 			{
 				$highestRow = $worksheet->getHighestRow();
 				$highestColumn = $worksheet->getHighestColumn();
-				for($row=2; $row<=$highestRow; $row++)
+				for($row=1; $row<=$highestRow; $row++)
 				{   
-					$namadaerah = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
-					$deskripsi= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
-					$data[] = array(
-						'namadaerah'        =>    $namadaerah,
-						'deskripsi'            =>    $deskripsi
-					);
+					$no_surat			= $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+					$tanggal_surat		= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+					$pengirim			= $worksheet->getCellByColumnAndRow(2, $row)->getValue();
+					$id_berkas			= $worksheet->getCellByColumnAndRow(3, $row)->getValue();
+					$id_klasifikasi 	= $worksheet->getCellByColumnAndRow(4, $row)->getValue();
+					$id_jenis			= $worksheet->getCellByColumnAndRow(5, $row)->getValue();
+					$id_sifat			= $worksheet->getCellByColumnAndRow(6, $row)->getValue();
+					$id_media_pengirim	= $worksheet->getCellByColumnAndRow(7, $row)->getValue();
+					$id_penyimpanan		= $worksheet->getCellByColumnAndRow(8, $row)->getValue();
+					$box				= $worksheet->getCellByColumnAndRow(9, $row)->getValue();
+					// $data[] = array(
+					// 	'namadaerah'        =>    $namadaerah,
+					// 	'deskripsi'            =>    $deskripsi
+					// );
+					if($no_surat !=''){
+						$data[] =
+						[
+							'id_klasifikasi' 	=> $id_klasifikasi, 
+							'no_surat' 			=> $no_surat, 
+							'tanggal_surat' 	=> $tanggal_surat, 
+							'pengirim' 			=> $pengirim, 
+							'id_jenis' 			=> $id_jenis, 
+							'id_sifat' 			=> $id_sifat, 
+							'id_berkas' 		=> $id_berkas, 
+							'id_penyimpanan' 	=> $id_penyimpanan, 
+							'box' 				=> $box, 
+							'id_media_pengirim' => $id_media_pengirim, 
+							'created_by' => $_SESSION['userid'],  
+						];
+					}
 				}
 			}
-			print_r($data);
+			$this->db->insert_batch($this->low, $data);
+			$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
+			redirect(base_url("admin/$this->low/"));
+			// echo "<pre>";
+			// print_r($data);
 			// $this->Daerah_m->insertimport($data);
 			
 		}
