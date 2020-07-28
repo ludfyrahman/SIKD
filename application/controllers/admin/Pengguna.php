@@ -146,6 +146,43 @@ class Pengguna extends CI_Controller {
 			redirect(base_url("admin/$this->low/"));
 		}
 	}
+	public function profil(){
+		$data['title'] = "Profil $this->cap";
+		$data['content'] = "$this->low/_form";
+		$data['type'] = 'Ubah';
+		// $data['jabatan'] = $this->db->query("SELECT * FROM jabatan")->result_array();
+		$data['data'] = $this->db->get_where("$this->low", ['id' => $_SESSION['userid']])->row_array();		
+		$this->load->view('backend/index',$data);
+	}
+	public function updateProfil(){
+		$d = $_POST;
+		try{
+			$arr =
+			[
+				'nama' => $this->input->post('nama'), 
+				'email' => $this->input->post('email'), 
+				'updated_at' => date('Y-m-d H:i:s'),
+				'updated_by' => $_SESSION['userid'],
+			];
+			if($d['password'] !=''){
+				if($d['password'] != $d['password_konfirmasi']){
+					$this->session->set_flashdata("message", ['danger', 'Password konfirmasi dengan password tidak sama', ' Berhasil']);
+					redirect(base_url("admin/$this->low/profil"));
+				}else{
+					$arr['password'] = password_hash($d['password'], PASSWORD_DEFAULT);
+				}
+			}
+			$this->session->set_flashdata("message", ['success', "Ubah $this->cap Berhasil", ' Berhasil']);
+			Log_Helper::Insert(['type' => 2, 'deskripsi' => Auth_Helper::Get("nama")." Mengubah Data ".$d['nama']." Di $this->cap", 'created_by' => $_SESSION['userid']]);
+			$this->db->update("$this->low",$arr, ['id' => $_SESSION['userid']]);
+			redirect(base_url("admin/$this->low/profil"));
+			
+		}catch(Exception $e){
+			$this->session->set_flashdata("message", ['danger', "Gagal Edit Data $this->cap", ' Gagal']);
+			redirect(base_url("admin/$this->low/profil"));
+			// $this->add();
+		}
+	}
 	public function deleteJabatan($id){
 		try{
 			$this->db->delete("hak_akses", ['id' => $id]);

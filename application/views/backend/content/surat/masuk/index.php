@@ -33,7 +33,14 @@
                     <?php 
                     if($_SESSION['userlevel'] == 1){
                     ?>
-                    <a href="<?= base_url("admin/".$ci->uri->segment(2)."/add")?>" class="btn btn-primary btn-block margin-bottom">Tambah Arsip</a>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <a href="<?= base_url("admin/".$ci->uri->segment(2)."/import")?>" class="btn btn-success btn-block margin-bottom">Import Template</a>
+                      </div>
+                      <div class="col-md-6">
+                        <a href="<?= base_url("admin/".$ci->uri->segment(2)."/add")?>" class="btn btn-primary btn-block margin-bottom">Tambah Arsip</a>
+                      </div>
+                    </div>
                     <?php } ?>
                       <!-- <div class="has-feedback">
                       <input type="text" class="form-control input-sm" id="search_arsip" placeholder="Search Mail">

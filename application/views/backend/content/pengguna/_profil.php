@@ -24,7 +24,7 @@
         <?php Response_Helper::part('alert') ?>
         <!-- /.box-header -->
         <div class="box-body">
-          <form action="<?= base_url('admin/pengguna/updateProfil')?>" method="post">
+          <form action="" method="post">
             <div class="row">
               <div class="form-group col-md-6">
                   <label>Nama</label>
@@ -41,6 +41,29 @@
               <div class="form-group col-md-6">
                   <label>Password Konfirmasi</label>
                   <input type="password" value='<?= Input_Helper::postOrOr('password_konfirmasi') ?>' name="password_konfirmasi" class="form-control" placeholder="Masukkan password konfirmasi anda" <?= ($type == 'Tambah' ? 'required' : '') ?>>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Level</label>
+                  <select class="form-control select2" name="level" style="width: 100%;">
+                  <?php
+                  $level = Input_Helper::postOrOr('level', $data['level']);
+                  for ($i=1; $i < count(LEVEL); $i++) {
+                  ?>
+                    <option <?= ($level == $i ? "selected" : "")?> value="<?= $i ?>"><?= LEVEL[$i] ?></option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
+                  <?php } ?>
+                  </select>
+              </div>
+              <div class="form-group col-md-6">
+                  <label>Status</label>
+                  <select class="form-control select2" name="status" style="width: 100%;">
+                  <?php
+                  $status = Input_Helper::postOrOr('status', $data['status']);
+                  ?>
+                    <option <?= ($status == 1 ? "selected" : "")?> value="1">Aktif</option>
+                    <option <?= ($status == 0 ? "selected" : "")?> value="0">Tidak Aktif</option>
+                    <!-- <option selected="selected"><?= LEVEL[$i] ?></option> -->
+                  </select>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary"><?= $type ?></button>
