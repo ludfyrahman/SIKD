@@ -122,7 +122,7 @@ $(".box-header .dropdown-toggle").hide();
     data      : datachart,
     xkey      : 'y',
     ykeys     : ['item1'],
-    labels    : ['Surat Masuk'],
+    labels    : ['Arsip'],
     lineColors: ['#a0d0e0'],
     hideHover : 'auto'
   });

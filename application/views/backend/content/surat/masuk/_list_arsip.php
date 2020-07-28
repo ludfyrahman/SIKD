@@ -1,7 +1,17 @@
 <table id="example1" class="table table-hover table-striped">
     <thead>
         <tr>
-            <td></td><td></td><td>Nama Pengirim</td><td>Klasifikasi</td><td>Status</td><td>Waktu</td>
+            <td></td><td></td><td>Nama Pengirim</td>
+            <td>Klasifikasi</td>
+            <td>Tanggal Pencipta</td>
+            <td>Pengirim Surat</td>
+            <td>Berkas</td>
+            <td>Jenis</td>
+            <td>Unit Pencipta</td>
+            <td>Penyimpanan</td>
+            <td>Boks</td>
+            <td>Status</td>
+            <td>Waktu</td>
         </tr>
     </thead>
     <tbody>
@@ -20,6 +30,13 @@
         <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$d['id']) ?>"><?= strtolower($d['pengirim']) ?></a></td>
         <td class="mailbox-subject"><?= strtolower($d['klasifikasi']) ?>
         </td>
+        <td><?= $d['tanggal_surat'] ?></td>
+        <td><?= $d['pengirim'] ?></td>
+        <td><?= $d['berkas'] ?></td>
+        <td><?= $d['jenis'] ?></td>
+        <td><?= $d['unit_pencipta'] ?></td>
+        <td><?= $d['penyimpanan'] ?></td>
+        <td><?= $d['box'] ?></td>
         <td class="mailbox-attachment">
         <i class="fa fa-paperclip"></i>
         </td>

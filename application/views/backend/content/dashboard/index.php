@@ -64,14 +64,14 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3><?= $jabatan ?></h3>
+              <h3><?= $sifat ?></h3>
 
-              <p>Jabatan</p>
+              <p>Sifat</p>
             </div>
             <div class="icon">
               <i class="ion ion-android-list"></i>
             </div>
-            <a href="<?= base_url('admin/jabatan') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="<?= base_url('admin/sifat') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
         </div>
         <!-- ./col -->
@@ -154,7 +154,7 @@
           <div class="box box-primary">
             <div class="box-header">
               <i class="ion ion-clipboard"></i>
-              <h3 class="box-title">Surat Masuk</h3>
+              <h3 class="box-title">Arsip</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">

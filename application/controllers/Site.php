@@ -6,6 +6,7 @@ class Site extends CI_Controller { //mengextends CI_Controller
     public function index () {
         $data['title'] = "Login";
         $data['content'] = "login/index";
+        $data['captcha'] = random_string('alnum', 6);
 		$this->load->view('frontend/index',$data);
     }
     public function doLogin(){
@@ -15,29 +16,30 @@ class Site extends CI_Controller { //mengextends CI_Controller
         }
         try {
             if($d){
-                $a = $this->db->get_where("pengguna", ['email' => $d['email']])->result_array();
-                // print_r($a);
-                // echo count($a);
-                // $a = $this->akun->Select('*', "WHERE email = '$d[email]'")[1];
-
-                if(count($a) < 1) {
-                    $this->session->set_flashdata("message", ['danger', 'Login gagal, silahkan cek email anda kembali', ' Gagal']);
+                if($d['captcha'] != $d['captcha_key']){
+                    $this->session->set_flashdata("message", ['danger', 'Kode Captcha salah', ' Gagal']);
                     return $this->index();
-                }
+                }else{
+                    $a = $this->db->get_where("pengguna", ['email' => $d['email']])->result_array();
+                    if(count($a) < 1) {
+                        $this->session->set_flashdata("message", ['danger', 'Login gagal, silahkan cek email anda kembali', ' Gagal']);
+                        return $this->index();
+                    }
 
-                $a = $a[0];
-                if($a['status'] == 0) {
-                    $this->session->set_flashdata("message", ['danger', 'Login gagal, Akun anda sedang dinonaktifkan', ' Gagal']);
-                    return $this->index();
-                }
-                if(!password_verify($d['password'], $a['password'])) {
-                    $this->session->set_flashdata("message", ['danger', 'Login gagal, Password anda salah', ' Gagal']);
-                    return $this->index();
-                }
+                    $a = $a[0];
+                    if($a['status'] == 0) {
+                        $this->session->set_flashdata("message", ['danger', 'Login gagal, Akun anda sedang dinonaktifkan', ' Gagal']);
+                        return $this->index();
+                    }
+                    if(!password_verify($d['password'], $a['password'])) {
+                        $this->session->set_flashdata("message", ['danger', 'Login gagal, Password anda salah', ' Gagal']);
+                        return $this->index();
+                    }
 
-                $_SESSION['userid'] = $a['id'];
-                $_SESSION['userlevel'] = $a['level'];
-                redirect(base_url("admin/dashboard"));
+                    $_SESSION['userid'] = $a['id'];
+                    $_SESSION['userlevel'] = $a['level'];
+                    redirect(base_url("admin/dashboard"));
+                }
             }
         }
         catch(Exception $e) {

@@ -119,9 +119,9 @@
           <a href="<?= base_url('admin/surat_masuk') ?>">
             <i class="fa fa-file-archive-o"></i>
             <span>Arsip</span>
-            <span class="pull-right-container">
+            <!-- <span class="pull-right-container">
               <span class="label label-warning pull-right">3</span>
-            </span>
+            </span> -->
           </a>
         </li>
         <li class=" <?= ($this->uri->segment(2) == "saran" ? 'active' : '') ?>">

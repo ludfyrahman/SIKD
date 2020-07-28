@@ -48,6 +48,7 @@ class Klasifikasi extends CI_Controller {
 				'created_by' => $_SESSION['userid'],  
 			];
 			$this->db->insert("$this->low",$arr);
+			Log_Helper::Insert(['type' => 1, 'deskripsi' => Auth_Helper::Get("nama")." Menambahkan ".$d['nama']." Di $this->cap", 'created_by' => $_SESSION['userid']]);
 			$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);
 			redirect(base_url("admin/$this->low/"));
 			
@@ -83,6 +84,7 @@ class Klasifikasi extends CI_Controller {
 			
 			$this->session->set_flashdata("message", ['success', "Ubah $this->cap Berhasil", ' Berhasil']);
 			$this->db->update("$this->low",$arr, ['id' => $id]);
+			Log_Helper::Insert(['type' => 2, 'deskripsi' => Auth_Helper::Get("nama")." Mengubah Data ".$d['nama']." Di $this->cap", 'created_by' => $_SESSION['userid']]);
 			redirect(base_url("admin/$this->low/"));
 			
 		}catch(Exception $e){

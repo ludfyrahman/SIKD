@@ -16,6 +16,11 @@
         <input type="password" class="form-control" name="password" placeholder="Password" required>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
+      <div class="form-group">
+        <div id="captcha"><h1><?= $captcha ?></h1></div>
+        <input type="hidden" value="<?= $captcha ?>" name="captcha_key">
+        <input type="text" name="captcha" required class="form-control" placeholder="Masukkan Captcha">
+      </div>
       <div class="row">
         <div class="col-xs-8">
           <div class="checkbox icheck">

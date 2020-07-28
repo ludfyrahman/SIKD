@@ -40,22 +40,32 @@ class Surat_Masuk extends CI_Controller {
 		if(isset($d['tanggal'])){
 			$tanggal = " AND DATE(sm.created_at)='$d[tanggal]'";
 		}
-		$data['inbox'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=1 GROUP BY smt.id_surat")->result_array();
-		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi FROM $this->low sm JOIN klasifikasi k ON sm.id_klasifikasi=k.id JOIN sifat s ON sm.id_sifat=s.id  where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
-		$data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
-		$data['sekarang'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=3 GROUP BY smt.id_surat")->result_array();
-		$data['nanti'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=4 GROUP BY smt.id_surat")->result_array();
-		$data['tidak_ditindak'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
-		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
-		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=5 GROUP BY smt.id_surat")->result_array();
+		// $data['inbox'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=1 GROUP BY smt.id_surat")->result_array();
+		$data['data'] = $this->db->query("SELECT sm.*, k.nama as klasifikasi, b.nama as berkas, pen.nama as penyimpanan,  j.nama as jenis, p.nama as unit_pencipta FROM $this->low sm 
+		JOIN klasifikasi k ON sm.id_klasifikasi=k.id 
+		JOIN sifat s ON sm.id_sifat=s.id 
+		JOIN berkas b ON sm.id_berkas=b.id
+		JOIN jenis  j ON sm.id_jenis=j.id
+		JOIN pengirim p ON sm.id_media_pengirim =p.id
+		JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
+		 where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
+		// $data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
+		// $data['sekarang'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=3 GROUP BY smt.id_surat")->result_array();
+		// $data['nanti'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=4 GROUP BY smt.id_surat")->result_array();
+		// $data['tidak_ditindak'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
+		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
+		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=5 GROUP BY smt.id_surat")->result_array();
+		// echo "<pre>";
+		// print_r($data);
+		// echo "</pre>";
 		$this->load->view('backend/index',$data);
 	}
 	public function pencarian($val = null){
@@ -196,7 +206,7 @@ class Surat_Masuk extends CI_Controller {
 						if(Input_Helper::validateSizeUpload("2000000", $f['file'])){
 							Input_Helper::uploadImage($f['gambar'], 'surat/masuk', $namagambar);
 							Input_Helper::uploadImage($f['file'], 'surat/masuk', $namafile);
-							// $akses = explode(',', $d['akses']);
+							Log_Helper::Insert(['type' => 1, 'deskripsi' => Auth_Helper::Get("nama")." Menambahkan ".$d['no_surat']." Di $this->cap", 'created_by' => $_SESSION['userid']]);
 							$this->db->insert("$this->low", $arr);
 							$id  = $this->db->insert_id();
 							$this->session->set_flashdata("message", ['success', "Berhasil Tambah $this->cap", ' Berhasil']);

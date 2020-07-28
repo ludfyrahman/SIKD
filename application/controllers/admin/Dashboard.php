@@ -18,7 +18,7 @@ class Dashboard extends CI_Controller { //mengextends CI_Controller
 		JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id GROUP BY smt.id_surat")->result_array();
         $data['surat_keluar'] = $this->db->get_where("surat_keluar", ['status' => 1])->num_rows();
-        $data['jabatan'] = $this->db->get("jabatan")->num_rows();
+        $data['sifat'] = $this->db->get("sifat")->num_rows();
         $data['log'] = $this->db->query("SELECT * FROM log order by created_at desc LIMIT 10")->result_array();
         $data['day'] = $this->db->query("SELECT * FROM log GROUP BY DAY(created_at) LIMIT 5")->result_array();
         

@@ -3,7 +3,7 @@
     <section class="content-header">
       <h1>
         <?= $title ?>
-        <small>13 new messages</small>
+        <!-- <small>13 new messages</small> -->
       </h1>
       
       <?php Response_Helper::part('breadcrumb') ?>
@@ -12,9 +12,9 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-      <?php Response_Helper::part('mailSide') ?>
+      
         <!-- /.col -->
-        <div class="col-md-9">
+        <div class="col-md-12">
           <div class="box box-primary">
             <div class="box-header with-border">
               <h3 class="box-title"><?= $title ?></h3>
@@ -45,9 +45,9 @@
                   <div class="col-md-6">
                     <h5>Media Pengirim :<?= $data['media'] ?></h5>
                   </div>
-                  <div class="col-md-6">
+                  <!-- <div class="col-md-6">
                     <h5>Tanggal Retensi :<?= $data['tanggal_mulai_retensi'] ?></h5>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>
