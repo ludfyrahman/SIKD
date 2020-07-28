@@ -19,7 +19,7 @@
     $no = 1;
     if (count($data) < 1) {
         echo "<tr>
-        <td colspan='6' style='text-align:center'>Surat Masuk Kosong</td>
+        <td colspan='13' style='text-align:center'>Surat Masuk Kosong</td>
         </tr>";
     }
     foreach ($data as $d) {
@@ -28,8 +28,7 @@
         <td><input type="checkbox"></td>
         <td class="mailbox-star"><a href="#"><i class="fa fa-star text-yellow"></i></a></td>
         <td class="mailbox-name"><a href="<?= base_url("admin/$this->low/detail/".$d['id']) ?>"><?= strtolower($d['pengirim']) ?></a></td>
-        <td class="mailbox-subject"><?= strtolower($d['klasifikasi']) ?>
-        </td>
+        <td class="mailbox-subject"><?= strtolower($d['klasifikasi']) ?></td>
         <td><?= $d['tanggal_surat'] ?></td>
         <td><?= $d['pengirim'] ?></td>
         <td><?= $d['berkas'] ?></td>

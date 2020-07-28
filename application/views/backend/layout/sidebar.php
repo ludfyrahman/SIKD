@@ -144,7 +144,7 @@
           </a>
         </li>
         
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
+        <!-- <li><a href="https://adminlte.io/docs"><i class="fa fa-book"></i> <span>Documentation</span></a></li> -->
         <li class="header">MENU</li>
         <li><a href="<?= base_url('admin/log') ?>"><i class="fa fa-circle-o text-red"></i> <span>Aktifitas</span></a></li>
         <?php }?>
