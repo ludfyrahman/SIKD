@@ -51,6 +51,8 @@ class Surat_Masuk extends CI_Controller {
 		JOIN pengirim p ON sm.id_media_pengirim =p.id
 		JOIN penyimpanan pen ON sm.id_penyimpanan=pen.id
 		 where sm.status='$value'  $tanggal and sm.created_by=$_SESSION[userid] $search")->result_array();
+		//  echo "<pre>";
+		//  print_r($data);
 		// $data['berkas'] = $this->db->query("SELECT sm.id, smt.dilihat,sm.pengirim, sm.created_at, k.nama as klasifikasi from surat_masuk sm 
 		// JOIN surat_masuk_tembusan smt ON sm.id=smt.id_surat
 		// JOIN klasifikasi k ON sm.id_klasifikasi=k.id $akses_id where sm.status='$value' $tanggal AND  smt.status=2 GROUP BY smt.id_surat")->result_array();
@@ -133,6 +135,85 @@ class Surat_Masuk extends CI_Controller {
 			}
 		}
 		$this->load->view('backend/index',$data);
+	}
+	public function import()	{
+		$data['title'] = "Import $this->cap";
+		$data['content'] = "$this->content/_import";
+		$data['type'] = 'Detail';
+		$data['data'] = null;
+		$this->load->view('backend/index',$data);
+	}
+	public function upload(){
+		include APPPATH.'third_party/PHPExcel.php';
+
+        // $config['upload_path'] = realpath('excel');
+        // $config['allowed_types'] = 'xlsx|xls|csv';
+        // $config['max_size'] = '10000';
+        // $config['encrypt_name'] = true;
+
+        // $this->load->library('upload', $config);
+
+        // if (!$this->upload->do_upload()) {
+
+        //     //upload gagal
+        //     $this->session->set_flashdata('notif', '<div class="alert alert-danger"><b>PROSES IMPORT GAGAL!</b> '.$this->upload->display_errors().'</div>');
+        //     //redirect halaman
+        //     // redirect('import/');
+
+        // } else {
+
+        //     $data_upload = $this->upload->data();
+
+        //     $excelreader     = new PHPExcel_Reader_Excel2007();
+        //     $loadexcel         = $excelreader->load('excel/'.$data_upload['file_name']); // Load file yang telah diupload ke folder excel
+        //     $sheet             = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);
+
+        //     $data = array();
+
+        //     $numrow = 1;
+        //     foreach($sheet as $row){
+        //                     if($numrow > 1){
+        //                         array_push($data, array(
+        //                             'nama_dosen' => $row['A'],
+        //                             'email'      => $row['B'],
+        //                             'alamat'      => $row['C'],
+        //                         ));
+        //             }
+        //         $numrow++;
+		// 	}
+		// 	print_r($data);
+        //     // $this->db->insert_batch('tbl_dosen', $data);
+        //     //delete file from server
+        //     unlink(realpath('excel/'.$data_upload['file_name']));
+
+        //     //upload success
+        //     // $this->session->set_flashdata('notif', '<div class="alert alert-success"><b>PROSES IMPORT BERHASIL!</b> Data berhasil diimport!</div>');
+        //     // //redirect halaman
+        //     // redirect('import/');
+
+		// }
+		if(isset($_FILES["file"]["name"]))
+		{
+			$path = $_FILES["file"]["tmp_name"];
+			$object = PHPExcel_IOFactory::load($path);
+			foreach($object->getWorksheetIterator() as $worksheet)
+			{
+				$highestRow = $worksheet->getHighestRow();
+				$highestColumn = $worksheet->getHighestColumn();
+				for($row=2; $row<=$highestRow; $row++)
+				{   
+					$namadaerah = $worksheet->getCellByColumnAndRow(0, $row)->getValue();
+					$deskripsi= $worksheet->getCellByColumnAndRow(1, $row)->getValue();
+					$data[] = array(
+						'namadaerah'        =>    $namadaerah,
+						'deskripsi'            =>    $deskripsi
+					);
+				}
+			}
+			print_r($data);
+			// $this->Daerah_m->insertimport($data);
+			
+		}
 	}
 	public function aksi($status, $response, $id){
 		if ($response == 'sekarang') {

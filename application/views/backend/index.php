@@ -389,6 +389,7 @@ $("#search_tidak_ditindak").on("keyup", function() {
 <script src="<?= base_url() ?>assets/plugins/timepicker/bootstrap-timepicker.min.js"></script>
 <!-- Slimscroll -->
 <script src="<?= base_url() ?>assets/plugins/iCheck/icheck.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css"></script>
 <script>
   // $.widget.bridge('uibutton', $.ui.button);
   $(function () {
