@@ -86,8 +86,10 @@
             <div class="box-footer">
               <div class="pull-right">
                 <!-- <button type="button" class="btn btn-default"><i class="fa fa-reply"></i> Reply</button> -->
-                <?php if ($data['created_by'] == $_SESSION['userid']) {?>
-                <button type="button" data-toggle="modal" data-target="#forward" class="btn btn-default"><i class="fa fa-share"></i> Teruskan</button>
+                <?php if ($data['created_by'] == $_SESSION['userid'] || $_SESSION['userlevel'] == 1) {?>
+                <!-- <button type="button" data-toggle="modal" data-target="#forward" class="btn btn-default"><i class="fa fa-share"></i> Teruskan</button> -->
+                <a href="<?= base_url("admin/$this->low/edit/$data[id]") ?>"><button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Ubah</button></a>
+                <a class="delete" href="<?= base_url("admin/$this->low/delete/$data[id]") ?>"><button type="button" class="btn btn-default"><i class="fa fa-trash"></i> Hapus</button></a>
                 <?php } ?>
               </div>
               <?php

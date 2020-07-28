@@ -130,11 +130,11 @@
               </div> -->
               <div class="form-group col-md-6">
                   <label>File</label>
-                  <input type="file" name="file" class="form-control" required>
+                  <input type="file" name="file" class="form-control" <?= ($type == 'Ubah' ? "" : "required") ?>>
               </div>
               <div class="form-group col-md-6">
                   <label>Gambar</label>
-                  <input type="file" name="gambar" class="form-control" required>
+                  <input type="file" name="gambar" class="form-control" <?= ($type == 'Ubah' ? "" : "required") ?>>
               </div>
               <div class="col-md-12">
                 <button class="btn btn-primary" ><?= $type ?></button>
