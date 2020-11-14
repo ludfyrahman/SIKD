@@ -21,10 +21,10 @@
             <div class="inner">
               <h3><?= $surat_masuk ?></h3>
 
-              <p>Arsip</p>
+              <p>Jumlah Arsip</p>
             </div>
             <div class="icon">
-              <i class="ion ion-android-mail"></i>
+              <i class="fa fa-archive" aria-hidden="true"></i>
             </div>
             <a href="<?= base_url('admin/surat_masuk') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -39,7 +39,7 @@
               <p>Jenis Arsip</p>
             </div>
             <div class="icon">
-              <i class="ion ion-email"></i>
+              <i class="fa fa-clone" aria-hidden="true"></i>
             </div>
             <a href="<?= base_url('admin/jenis') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -51,10 +51,10 @@
             <div class="inner">
               <h3><?= $pengguna ?></h3>
 
-              <p>Pengguna Terdaftar</p>
+              <p>Pengelola Arsip</p>
             </div>
             <div class="icon">
-              <i class="ion ion-person-add"></i>
+              <i class="fa fa-user-circle"></i>
             </div>
             <a href="<?= base_url('admin/pengguna') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -66,10 +66,10 @@
             <div class="inner">
               <h3><?= $sifat ?></h3>
 
-              <p>Sifat</p>
+              <p>Sifat Arsip</p>
             </div>
             <div class="icon">
-              <i class="ion ion-android-list"></i>
+              <i class="fa fa-clipboard" aria-hidden="true"></i>
             </div>
             <a href="<?= base_url('admin/sifat') ?>" class="small-box-footer">Info Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
           </div>
@@ -85,9 +85,9 @@
           <div class="nav-tabs-custom">
             <!-- Tabs within a box -->
             <ul class="nav nav-tabs pull-right">
-              <li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>
+              <!--<li class="active"><a href="#revenue-chart" data-toggle="tab">Area</a></li>-->
               <!-- <li><a href="#sales-chart" data-toggle="tab">Donut</a></li> -->
-              <li class="pull-left header"><i class="fa fa-inbox"></i> Surat</li>
+              <li class="pull-left header"><i class="fa fa-archive" aria-hidden="true"></i>Statistik Arsip Masuk</li>
             </ul>
             <div class="tab-content no-padding">
               <!-- Morris chart - Sales -->
@@ -120,7 +120,9 @@
                 <!-- /.timeline-label -->
                 <?php 
                 foreach ($log as $l) {
-                  if(strpos($l['created_at'], $date) !== FALSE){
+                  $datelog = date('Y-m-d', strtotime($l['created_at']));
+                  // echo $datelog."<br>";
+                  if($date == $datelog){
                 ?>
                 <!-- timeline item -->
                 <li>

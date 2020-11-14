@@ -29,7 +29,7 @@
               
               <div class="form-group col-md-6">
                   <label>Download Template</label><br>
-                  <a target="_blank" href="<?= base_url("admin/".$this->uri->segment(2)."/download") ?>"><button class="btn btn-success">Download Template</button></a>
+                  <a target="_blank" href="<?= base_url("admin/".$this->uri->segment(2)."/download") ?>"><button type="button" class="btn btn-success">Download Template</button></a>
               </div>
               <div class="form-group col-md-6">
                   <label>Import File * xls</label>

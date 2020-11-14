@@ -168,7 +168,7 @@ class Surat_Masuk extends CI_Controller {
 						[
 							'id_klasifikasi' 	=> $id_klasifikasi, 
 							'no_surat' 			=> $no_surat, 
-							'tanggal_surat' 	=> $tanggal_surat, 
+							'tanggal_surat' 	=> date('Y-m-d', strtotime($tanggal_surat)), 
 							'pengirim' 			=> $pengirim, 
 							'id_jenis' 			=> $id_jenis, 
 							'id_sifat' 			=> $id_sifat, 
